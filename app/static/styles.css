@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #d6984f;
+    color: white;
+    padding: 0.5px;
+    text-align: center;
+}
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #d6984f;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    margin: 20px 0 20px;
+    margin-top: 20 px;
+}
+
+
+
+select, input[type="text"], button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #d6984f;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #6F6D6C;
+}
+
+#messages-container {
+    margin-top: 20px;
+}
+
+.flashes {
+    list-style-type: none;
+    padding: 0;
+}
+
+.flashes li {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+}
+
+.nav-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #6F6D6C;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.info {
+    background-color: #2196F3; /* Blue */
+}
+
+.success {
+    background-color: #929e7a; /* Green */
+}
+
+.warning {
+    background-color: #FFC107; /* Yellow */
+}
+
+.error {
+    background-color: #F44336; /* Red */
+}

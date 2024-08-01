@@ -1,0 +1,10 @@
+<!-- confirm_download.html -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<a href="{{ url_for('download_file') }}" class="btn btn-primary">Download File</a>

@@ -1,0 +1,8 @@
+samenv/
+__pycache__/
+*.pyc
+*.pyo
+instance/
+.env
+/temporary_files
+/uploads

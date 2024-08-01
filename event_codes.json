@@ -1,0 +1,1587 @@
+{
+    "0": {
+        "Name": "Phase On",
+        "Description": "Set when NEMA Phase On becomes active, either upon start of green or walk interval, whichever occurs first.",
+        "ParameterDescription": "Phase #"
+    },
+    "1": {
+        "Name": "Phase Begin Green",
+        "Description": "Set when either solid or flashing green indication has begun.",
+        "ParameterDescription": "Phase #"
+    },
+    "2": {
+        "Name": "Phase Check",
+        "Description": "Set when a conflicting call is registered against the active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "3": {
+        "Name": "Phase Min Complete",
+        "Description": "Set when phase min timer expires.",
+        "ParameterDescription": "Phase #"
+    },
+    "4": {
+        "Name": "Phase Gap Out",
+        "Description": "Phase termination due to gap out termination condition. Set once per phase when phase gaps out but may not necessarily occur upon phase termination.",
+        "ParameterDescription": "Phase #"
+    },
+    "5": {
+        "Name": "Phase Max Out",
+        "Description": "Set when phase max timer expires, but may not necessarily occur upon phase termination.",
+        "ParameterDescription": "Phase #"
+    },
+    "6": {
+        "Name": "Phase Forceoff",
+        "Description": "Set when phase forceoff is applied by the coordinator to the active green phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "7": {
+        "Name": "Phase Green Termination",
+        "Description": "Set when phase green indications are terminated into either yellow change interval or permissive (FYA) movement.",
+        "ParameterDescription": "Phase #"
+    },
+    "8": {
+        "Name": "Phase Begin Yellow Clearance",
+        "Description": "Set when phase yellow indication becomes active and interval timer begins.",
+        "ParameterDescription": "Phase #"
+    },
+    "9": {
+        "Name": "Phase End Yellow Clearance",
+        "Description": "Set when phase yellow indication become inactive.",
+        "ParameterDescription": "Phase #"
+    },
+    "10": {
+        "Name": "Phase Begin Red Clearance",
+        "Description": "Set only if phase red clearance is served.  Set when red clearance timing begins.",
+        "ParameterDescription": "Phase #"
+    },
+    "11": {
+        "Name": "Phase End Red Clearance",
+        "Description": "Set only if phase red clearance is served.  Set when red clearance timing concludes.",
+        "ParameterDescription": "Phase #"
+    },
+    "12": {
+        "Name": "Phase Inactive",
+        "Description": "Set when the phase is no longer active within the ring, including completion of any trailing overlaps or end of barrier delays.",
+        "ParameterDescription": "Phase #"
+    },
+    "13": {
+        "Name": "Extension Timer Gap Out",
+        "Description": "Set when the extension timer gaps out.",
+        "ParameterDescription": "Phase #"
+    },
+    "14": {
+        "Name": "Phase Skipped",
+        "Description": "Set when phase is skipped.",
+        "ParameterDescription": "Phase #"
+    },
+    "15": {
+        "Name": "Extension Timer Reduction Start",
+        "Description": "Set when extension timer starts to reduce (the time before reduction).",
+        "ParameterDescription": "Phase #"
+    },
+    "16": {
+        "Name": "Extension Timer Minimum Achieved",
+        "Description": "Set when the extension timer minimum is reached (after the time to reduce).",
+        "ParameterDescription": "Phase #"
+    },
+    "17": {
+        "Name": "Added Initial Complete",
+        "Description": "Set when added initial is achieved.",
+        "ParameterDescription": "Phase #"
+    },
+    "18": {
+        "Name": "Next Phase Decision",
+        "Description": "Set when the controller determines a phase will be next to begin green after the current active phase(s) end red clearance.",
+        "ParameterDescription": "Phase #"
+    },
+    "19": {
+        "Name": "TSP Early Forceoff",
+        "Description": "Set when TSP early forceoff is applied to an active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "20": {
+        "Name": "Preemption Forceoff",
+        "Description": "Set when the controller applies preemption forceoff to the active cycle.",
+        "ParameterDescription": "Phase #"
+    },
+    "21": {
+        "Name": "Pedestrian Begin Walk",
+        "Description": "Set when walk indication becomes active.",
+        "ParameterDescription": "Phase #"
+    },
+    "22": {
+        "Name": "Pedestrian Begin Clearance",
+        "Description": "Set when flashing don't walk indication becomes active.",
+        "ParameterDescription": "Phase #"
+    },
+    "23": {
+        "Name": "Pedestrian Begin Steady Don't Walk",
+        "Description": "Set when don't walk indication becomes steady (non flashing) from either termination of ped clearance, or after a dark interval.",
+        "ParameterDescription": "Phase #"
+    },
+    "24": {
+        "Name": "Pedestrian Dark",
+        "Description": "Set when the pedestrian outputs are set off.",
+        "ParameterDescription": "Phase #"
+    },
+    "25": {
+        "Name": "Extended Pedestrian Change Interval",
+        "Description": "Set when extended pedestrian change interval is requested.",
+        "ParameterDescription": "Phase #"
+    },
+    "26": {
+        "Name": "Oversized Ped Served",
+        "Description": "Oversized ped served in coord.",
+        "ParameterDescription": "Phase #"
+    },
+    "31": {
+        "Name": "Barrier Termination",
+        "Description": "Set when all active phases become inactive in the ring and cross barrier phases are next to be served.",
+        "ParameterDescription": "Barrier #"
+    },
+    "32": {
+        "Name": "FYA - Begin Permissive",
+        "Description": "Set when FYA becomes active.",
+        "ParameterDescription": "Overlap #"
+    },
+    "33": {
+        "Name": "FYA - End Permissive",
+        "Description": "Set when FYA becomes inactive through either clearance of the permissive movement or transition into a protected movement.",
+        "ParameterDescription": "Overlap #"
+    },
+    "41": {
+        "Name": "Phase Hold Active",
+        "Description": "Set when phase hold is applied by the coordinator, preemptor, or external logic.",
+        "ParameterDescription": "Phase #"
+    },
+    "42": {
+        "Name": "Phase Hold Released",
+        "Description": "Set when phase hold is released by the coordinator, preemptor, or external logic.",
+        "ParameterDescription": "Phase #"
+    },
+    "43": {
+        "Name": "Phase Call Registered",
+        "Description": "Call to service on a phase is registered by vehicular demand.",
+        "ParameterDescription": "Phase #"
+    },
+    "44": {
+        "Name": "Phase Call Dropped",
+        "Description": "Call to service on a phase is cleared by either service of the phase or removal of call.",
+        "ParameterDescription": "Phase #"
+    },
+    "45": {
+        "Name": "Pedestrian Call Registered",
+        "Description": "Call to service on a phase is registered by pedestrian demand.",
+        "ParameterDescription": "Phase #"
+    },
+    "46": {
+        "Name": "Phase Omit On",
+        "Description": "Set when phase omit is applied by the coordinator, preemptor, or other dynamic sources.",
+        "ParameterDescription": "Phase #"
+    },
+    "47": {
+        "Name": "Phase Omit Off",
+        "Description": "Set when phase omit is released by the coordinator, preemptor, or other dynamic sources.",
+        "ParameterDescription": "Phase #"
+    },
+    "48": {
+        "Name": "Pedestrian Omit On",
+        "Description": "Set when ped omit is applied by the coordinator, preemptor, or other dynamic sources.",
+        "ParameterDescription": "Phase #"
+    },
+    "49": {
+        "Name": "Pedestrian Omit Off",
+        "Description": "Set when ped omit is released by the coordinator, preemptor, or other dynamic sources.",
+        "ParameterDescription": "Phase #"
+    },
+    "50": {
+        "Name": "MAX 1 In-Effect",
+        "Description": "Set when maximum green (MAX 1) interval is in-effect for the active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "51": {
+        "Name": "MAX 2 In-Effect",
+        "Description": "Set when maximum green (MAX 2) interval is in-effect for the active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "52": {
+        "Name": "Dynamic MAX In-Effect",
+        "Description": "Set when dynamic max interval is in-effect for the active phase. Populated upon termination if MAX green (MAX 1 or MAX 2) interval",
+        "ParameterDescription": "Phase #"
+    },
+    "53": {
+        "Name": "Dynamic MAX Step Up",
+        "Description": "Set when dynamic max interval steps up for the active phase (initially after two consecutive phase max out events).",
+        "ParameterDescription": "Phase #"
+    },
+    "54": {
+        "Name": "Dynamic MAX Step Down",
+        "Description": "Set when dynamic max begins step down for the actuve phase (initially after two consecutive phase gap out events).",
+        "ParameterDescription": "Phase #"
+    },
+    "55": {
+        "Name": "Phase Advance Warning Sign On",
+        "Description": "Set when advance warning sign is on.",
+        "ParameterDescription": "Phase #"
+    },
+    "56": {
+        "Name": "Phase Advance Warning Sign Off",
+        "Description": "Set when advance warning sign is off.",
+        "ParameterDescription": "Phase #"
+    },
+    "61": {
+        "Name": "Overlap Begin Green",
+        "Description": "Set when overlap becomes green. Do not set repeatedly when overlap is flashing green.",
+        "ParameterDescription": "Overlap #"
+    },
+    "62": {
+        "Name": "Overlap Begin Trailing Green (Extension)",
+        "Description": "Set when overlap is green and extension timers begin timing.",
+        "ParameterDescription": "Overlap #"
+    },
+    "63": {
+        "Name": "Overlap Begin Yellow",
+        "Description": "Set when overlap is in a yellow clearance state.",
+        "ParameterDescription": "Overlap #"
+    },
+    "64": {
+        "Name": "Overlap Begin Red Clearance",
+        "Description": "Set when overlap begins timing red clearance intervals.",
+        "ParameterDescription": "Overlap #"
+    },
+    "65": {
+        "Name": "Overlap Off (Inactive with red indication)",
+        "Description": "Set when overlap has completed all timing, allowing any conflicting phase next to begin service.",
+        "ParameterDescription": "Overlap #"
+    },
+    "66": {
+        "Name": "Overlap Dark",
+        "Description": "Set when overlap head is set dark (no active outputs).",
+        "ParameterDescription": "Overlap #"
+    },
+    "67": {
+        "Name": "Pedestrian Overlap Begin Walk",
+        "Description": "Set when walk indication becomes active.",
+        "ParameterDescription": "Overlap #"
+    },
+    "68": {
+        "Name": "Pedestrian Overlap Begin Clearance",
+        "Description": "Set when flashing don't walk indication becomes active.",
+        "ParameterDescription": "Overlap #"
+    },
+    "69": {
+        "Name": "Pedestrian Overlap Begin Steady Don't Walk",
+        "Description": "Set when don't walk indication becomes steady (non flashing) from either termination of ped clearance, or after a dark interval.",
+        "ParameterDescription": "Overlap #"
+    },
+    "70": {
+        "Name": "Pedestrian Overlap Dark",
+        "Description": "Set when the pedestrian outputs are set off.",
+        "ParameterDescription": "Overlap #"
+    },
+    "71": {
+        "Name": "Overlap Advance Warning Sign On",
+        "Description": "Set when advance warning sign becomes active.",
+        "ParameterDescription": "Overlap #"
+    },
+    "72": {
+        "Name": "Overlap Advance Warning Sign Off",
+        "Description": "Set when advance warning sign becomes inactive.",
+        "ParameterDescription": "Overlap #"
+    },
+    "81": {
+        "Name": "Vehicle Detector Off",
+        "Description": "Vehicle detector has turned off. Detector on and off events are triggered post any detector delay/extension processing.",
+        "ParameterDescription": "Vehicle detector #"
+    },
+    "82": {
+        "Name": "Vehicle Detector On",
+        "Description": "Vehicle detector has turned on. Detector on and off events are triggered post any detector delay/extension processing.",
+        "ParameterDescription": "Vehicle detector #"
+    },
+    "83": {
+        "Name": "Vehicle Detector Restored",
+        "Description": "Detector restored to non-failed state by either manual restoration or re-enabling via continued diagnostics.",
+        "ParameterDescription": "Vehicle detector #"
+    },
+    "84": {
+        "Name": "Vehicle Detector Fault- Other",
+        "Description": "Detector failure logged upon local controller diagnostics.",
+        "ParameterDescription": "Vehicle detector #"
+    },
+    "85": {
+        "Name": "Vehicle Detector Fault- Watchdog",
+        "Description": "Detector failure logged upon local controller diagnostics.",
+        "ParameterDescription": "Vehicle detector #"
+    },
+    "86": {
+        "Name": "Vehicle Detector Fault- Open Loop",
+        "Description": "Detector failure logged upon local controller diagnostics.",
+        "ParameterDescription": "Vehicle detector #"
+    },
+    "87": {
+        "Name": "Vehicle Detector Fault- Shorted Loop",
+        "Description": "Detector failure logged upon local controller diagnostics.",
+        "ParameterDescription": "Vehicle detector #"
+    },
+    "88": {
+        "Name": "Vehicle Detector Fault- Excessive Change",
+        "Description": "Detector failure logged upon local controller diagnostics.",
+        "ParameterDescription": "Vehicle detector #"
+    },
+    "89": {
+        "Name": "Ped Detector Off",
+        "Description": "Ped detector turned off. Detector events are triggered post any detector delay/extension processing.",
+        "ParameterDescription": "Pedestrian detector #"
+    },
+    "90": {
+        "Name": "Ped Detector On",
+        "Description": "Ped detector turned on. Detector events are triggered post any detector delay/extension processing.",
+        "ParameterDescription": "Pedestrian detector #"
+    },
+    "91": {
+        "Name": "Ped Detector Failed",
+        "Description": "Detector failure logged upon local controller diagnostics.",
+        "ParameterDescription": "Pedestrian detector #"
+    },
+    "92": {
+        "Name": "Ped Detector Restored",
+        "Description": "Detector failure logged upon local controller diagnostics.",
+        "ParameterDescription": "Pedestrian detector #"
+    },
+    "93": {
+        "Name": "TSP Detector Off",
+        "Description": "Set when TSP detector becomes inactive. TSP detector event occurs post any detector delay/extension.",
+        "ParameterDescription": "TSP #"
+    },
+    "94": {
+        "Name": "TSP Detector On",
+        "Description": "Set when TSP detector is active. TSP detector event occurs post any detector delay/extension.",
+        "ParameterDescription": "TSP #"
+    },
+    "101": {
+        "Name": "Preempt Advance Warning Input",
+        "Description": "Set when preemption advance warning input is activated.",
+        "ParameterDescription": "Preempt #"
+    },
+    "102": {
+        "Name": "Preempt (Call) Input On",
+        "Description": "Set when preemption input is activated.",
+        "ParameterDescription": "Preempt #"
+    },
+    "103": {
+        "Name": "Preempt Gate Down Input Received",
+        "Description": "Set when gate down input is received by the controller.",
+        "ParameterDescription": "Preempt #"
+    },
+    "104": {
+        "Name": "Preempt (Call) Input Off",
+        "Description": "Set when preemption input is de-activated.",
+        "ParameterDescription": "Preempt #"
+    },
+    "105": {
+        "Name": "Preempt Entry Started",
+        "Description": "Set when preemption delay expires and controller begins transition timing (forceoff) to serve preemption.",
+        "ParameterDescription": "Preempt #"
+    },
+    "106": {
+        "Name": "Preemption Begin Track Clearance",
+        "Description": "Set when track clearance phases are green and track clearance timing begins.",
+        "ParameterDescription": "Preempt #"
+    },
+    "107": {
+        "Name": "Preemption Begin Dwell Service",
+        "Description": "Set when preemption dwell or limited service begins or minimum dwell timer is reset due to call drop and reapplication.",
+        "ParameterDescription": "Preempt #"
+    },
+    "108": {
+        "Name": "Preemption Link Active On",
+        "Description": "Set when linked preemptor input is applied from active preemptor.",
+        "ParameterDescription": "Preempt #"
+    },
+    "109": {
+        "Name": "Preemption Link Active Off",
+        "Description": "Set when linked preemptor input is dropped from active preemptor.",
+        "ParameterDescription": "Preempt #"
+    },
+    "110": {
+        "Name": "Preemption Max Presence Exceeded",
+        "Description": "Set when preemption max presence timer is exceeded and preemption input is released from service.",
+        "ParameterDescription": "Preempt #"
+    },
+    "111": {
+        "Name": "Preemption Begin Exit Interval",
+        "Description": "Set when preemption exit interval phases are green and exit timing begins.",
+        "ParameterDescription": "Preempt #"
+    },
+    "112": {
+        "Name": "TSP Check In",
+        "Description": "Set when request for priority is received.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "113": {
+        "Name": "TSP Adjustment to Early Green",
+        "Description": "Set when controller is adjusting active cycle to accommodate early service to TSP phases.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "114": {
+        "Name": "TSP Adjustment to Extend Green",
+        "Description": "Set when controller is adjusting active cycle to accommodate extended service to TSP phases.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "115": {
+        "Name": "TSP Check Out",
+        "Description": "Set when the arrival time for the TSP event reaches zero.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "116": {
+        "Name": "Preemption Forceoff",
+        "Description": "Set when preemption applies forceoffs to any phase in the active cycle.",
+        "ParameterDescription": "Preemptor #"
+    },
+    "117": {
+        "Name": "TSP Early Forceoff",
+        "Description": "Set when TSP early forceoff is applied to the active cycle.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "120": {
+        "Name": "TSP Begin Service",
+        "Description": "Prioritor service is started.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "121": {
+        "Name": "TSP End Service",
+        "Description": "Prioritor service has ended.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "131": {
+        "Name": "Coord Pattern Change",
+        "Description": "Coordination pattern that is actively running in the controller.",
+        "ParameterDescription": "Pattern  #"
+    },
+    "132": {
+        "Name": "Cycle Length Change",
+        "Description": "Set upon selection of a new coordination pattern change that selects a new cycle length.",
+        "ParameterDescription": "New Cycle Length in Seconds"
+    },
+    "133": {
+        "Name": "Offset Length Change",
+        "Description": "Set upon selection of a new coordination pattern change that selects a new cycle length. Cycle lengths in excess of 255 shall record this event with a 255 parameter, along with event code 156.",
+        "ParameterDescription": "New Offset in Seconds"
+    },
+    "134": {
+        "Name": "Programmed Split 1 Change",
+        "Description": "Programmed split time for phase 1 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "135": {
+        "Name": "Programmed Split 2 Change",
+        "Description": "Programmed split time for phase 2 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "136": {
+        "Name": "Programmed Split 3 Change",
+        "Description": "Programmed split time for phase 3 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "137": {
+        "Name": "Programmed Split 4 Change",
+        "Description": "Programmed split time for phase 4 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "138": {
+        "Name": "Programmed Split 5 Change",
+        "Description": "Programmed split time for phase 5 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "139": {
+        "Name": "Programmed Split 6 Change",
+        "Description": "Programmed split time for phase 6 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "140": {
+        "Name": "Programmed Split 7 Change",
+        "Description": "Programmed split time for phase 7 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "141": {
+        "Name": "Programmed Split 8 Change",
+        "Description": "Programmed split time for phase 8 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "142": {
+        "Name": "Programmed Split 9 Change",
+        "Description": "Programmed split time for phase 9 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "143": {
+        "Name": "Programmed Split 10 Change",
+        "Description": "Programmed split time for phase 10 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "144": {
+        "Name": "Programmed Split 11 Change",
+        "Description": "Programmed split time for phase 11 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "145": {
+        "Name": "Programmed Split 12 Change",
+        "Description": "Programmed split time for phase 12 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "146": {
+        "Name": "Programmed Split 13 Change",
+        "Description": "Programmed split time for phase 13 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "147": {
+        "Name": "Programmed Split 14 Change",
+        "Description": "Programmed split time for phase 14 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "148": {
+        "Name": "Programmed Split 15 Change",
+        "Description": "Programmed split time for phase 15 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "149": {
+        "Name": "Programmed Split 16 Change",
+        "Description": "Programmed split time for phase 16 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "150": {
+        "Name": "Coord cycle state change",
+        "Description": "Cycle state has changed. Parameter: 0=Free, 1=In Step, 2=Transition-Add, 3=Transition-Subtract, 4 = Transition-Dwell, 5=Local Zero, 6=Begin Pickup, 7=Master Cycle Zero",
+        "ParameterDescription": "New Cycle State"
+    },
+    "151": {
+        "Name": "Coordinated phase yield point",
+        "Description": "Set when a coordinated phase has reached the yield point.",
+        "ParameterDescription": "Phase #"
+    },
+    "152": {
+        "Name": "Coordinated Phase Begin",
+        "Description": "Set when coordinated phase begins.",
+        "ParameterDescription": "Phase #"
+    },
+    "153": {
+        "Name": "Logic Statement True",
+        "Description": "Set when the logic statement evaluation changes from false to true.",
+        "ParameterDescription": "Logic Statement #"
+    },
+    "154": {
+        "Name": "Logic Statement False",
+        "Description": "Set when logic statement evaluation changes from true to false.",
+        "ParameterDescription": "Logic Statement #"
+    },
+    "155": {
+        "Name": "Unit Control Status Change",
+        "Description": "Set when control mode changes.",
+        "ParameterDescription": "1 = Other, 2 = System Control, 3 = System Standby, 5 = Manual, 6 = Timebase, 7 = Interconnect, 8 = Interconnect Backup, 9 = Remote Manual Control, 10 = Local Manual Control."
+    },
+    "156": {
+        "Name": "Additional Cycle Length Change",
+        "Description": "Set simultaneously with Event Code 132 when existing cycle length exceeds 255 seconds. When this Event Code 156 is used, Event Code 132 shall be 255, where the value of this Event Code 156 will be the additional cycle length above 255 (in seconds). Cycle lengths longer than 510 seconds will require a controller look up.",
+        "ParameterDescription": "Seconds #"
+    },
+    "171": {
+        "Name": "Test Input On",
+        "Description": "Test Input has turned on.",
+        "ParameterDescription": "Test Input #"
+    },
+    "172": {
+        "Name": "Test Input Off",
+        "Description": "Test Input has turned off",
+        "ParameterDescription": "Test Input #"
+    },
+    "173": {
+        "Name": "Unit Flash Status change",
+        "Description": "NTCIP Unit Flash Status has changed. Parameter: 1=Other, 2=Not Flash, 3=Automatic, 4=Local Manual, 5=Fault Monitor, 6=MMU, 7=Startup, 8=Preempt",
+        "ParameterDescription": "New Unit Flash Status value"
+    },
+    "174": {
+        "Name": "Unit Alarm Status 1 change",
+        "Description": "NTCIP Unit Alarm Status 1 has changed. Parameter: bit 0=Cycle Fault, 1=Coord Fault, 2=Coord Fail, 3=Cycle Fail, 4=MMU Flash, 5=Local Flash, 6=Local Free, 7=Coord Active",
+        "ParameterDescription": "New Alarm Status 1 value"
+    },
+    "175": {
+        "Name": "Alarm Group change",
+        "Description": "NTCIP Alarm Group State has changed. Parameter: bit 0=Alarm Input 1, 1=Alarm Input 2, ..., 7=Alarm Input 8",
+        "ParameterDescription": "New Alarm Group State value"
+    },
+    "176": {
+        "Name": "Special Function Output on",
+        "Description": "Special function output has turned on.",
+        "ParameterDescription": "Special Function #"
+    },
+    "177": {
+        "Name": "Special Function Output off",
+        "Description": "Special function output has turned off.",
+        "ParameterDescription": "Special Function #"
+    },
+    "178": {
+        "Name": "Manual control enable off/on",
+        "Description": "Manual Control Enable state has changed. Parameter: 0=Off, 1=On",
+        "ParameterDescription": "Manual Control Enable State"
+    },
+    "179": {
+        "Name": "Interval Advance off/on",
+        "Description": "Interval Advance state has changed. Parameter: 0=Off, 1=On",
+        "ParameterDescription": "Interval Advance state"
+    },
+    "180": {
+        "Name": "Stop Time off/on",
+        "Description": "Set when stop time input is applied or removed, regardless of source of stop or state. Parameter: 0=Off, 1=On",
+        "ParameterDescription": "Stop Time state"
+    },
+    "181": {
+        "Name": "Controller Clock Updated",
+        "Description": "Set when the controller OS clock is adjusted via communications, OS command, or external input.",
+        "ParameterDescription": "Time correction in Seconds"
+    },
+    "182": {
+        "Name": "Power Failure Detected",
+        "Description": "Line voltage drops between 0-89 volts AC for more than 100 ms.",
+        "ParameterDescription": "1"
+    },
+    "183": {
+        "Name": "Power Restored",
+        "Description": "Line voltage applied/reapplied greater than 98 volts AC.",
+        "ParameterDescription": "Not used"
+    },
+    "184": {
+        "Name": "Power Restored",
+        "Description": "Line voltage applied/reapplied greater than 98 volts AC.",
+        "ParameterDescription": "Not used"
+    },
+    "185": {
+        "Name": "Vendor Specific Alarm",
+        "Description": "Vendor specific Alarm Event.",
+        "ParameterDescription": "Vendor Specific Alarm Type"
+    },
+    "200": {
+        "Name": "Alarm On",
+        "Description": "Set when cabinet/system alarm is activated.",
+        "ParameterDescription": "Alarm #."
+    },
+    "201": {
+        "Name": "Alarm Off",
+        "Description": "Set when cabinet/system alarm is deactivated.",
+        "ParameterDescription": "Alarm #"
+    },
+    "202": {
+        "Name": "Aux Switch On/Off",
+        "Description": "Set when local controller aux switch is active (1) or inactive (0).",
+        "ParameterDescription": "Aux Switch On(1), Off(0)"
+    },
+    "203": {
+        "Name": "Programmed Split 17 Change",
+        "Description": "Programmed split time for phase 17 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "204": {
+        "Name": "Programmed Split 18 Change",
+        "Description": "Programmed split time for phase 18 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "205": {
+        "Name": "Programmed Split 19 Change",
+        "Description": "Programmed split time for phase 19 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "206": {
+        "Name": "Programmed Split 20 Change",
+        "Description": "Programmed split time for phase 20 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "207": {
+        "Name": "Programmed Split 21 Change",
+        "Description": "Programmed split time for phase 21 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "208": {
+        "Name": "Programmed Split 22 Change",
+        "Description": "Programmed split time for phase 22 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "209": {
+        "Name": "Programmed Split 23 Change",
+        "Description": "Programmed split time for phase 23 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "210": {
+        "Name": "Programmed Split 24 Change",
+        "Description": "Programmed split time for phase 24 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "211": {
+        "Name": "Programmed Split 25 Change",
+        "Description": "Programmed split time for phase 25 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "212": {
+        "Name": "Programmed Split 26 Change",
+        "Description": "Programmed split time for phase 26 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "213": {
+        "Name": "Programmed Split 27 Change",
+        "Description": "Programmed split time for phase 27 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "214": {
+        "Name": "Programmed Split 28 Change",
+        "Description": "Programmed split time for phase 28 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "215": {
+        "Name": "Programmed Split 29 Change",
+        "Description": "Programmed split time for phase 29 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "216": {
+        "Name": "Programmed Split 30 Change",
+        "Description": "Programmed split time for phase 30 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "217": {
+        "Name": "Programmed Split 31 Change",
+        "Description": "Programmed split time for phase 31 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "218": {
+        "Name": "Programmed Split 32 Change",
+        "Description": "Programmed split time for phase 32 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "300": {
+        "Name": "Actual Split 1",
+        "Description": "Actual split time for phase 1, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "301": {
+        "Name": "Actual Split 2",
+        "Description": "Actual split time for phase 2, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "302": {
+        "Name": "Actual Split 3",
+        "Description": "Actual split time for phase 3, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "303": {
+        "Name": "Actual Split 4",
+        "Description": "Actual split time for phase 4, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "304": {
+        "Name": "Actual Split 5",
+        "Description": "Actual split time for phase 5, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "305": {
+        "Name": "Actual Split 6",
+        "Description": "Actual split time for phase 6, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "306": {
+        "Name": "Actual Split 7",
+        "Description": "Actual split time for phase 7, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "307": {
+        "Name": "Actual Split 8",
+        "Description": "Actual split time for phase 8, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "308": {
+        "Name": "Actual Split 9",
+        "Description": "Actual split time for phase 9, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "309": {
+        "Name": "Actual Split 10",
+        "Description": "Actual split time for phase 10, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "310": {
+        "Name": "Actual Split 11",
+        "Description": "Actual split time for phase 11, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "311": {
+        "Name": "Actual Split 12",
+        "Description": "Actual split time for phase 12, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "312": {
+        "Name": "Actual Split 13",
+        "Description": "Actual split time for phase 13, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "313": {
+        "Name": "Actual Split 14",
+        "Description": "Actual split time for phase 14, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "314": {
+        "Name": "Actual Split 15",
+        "Description": "Actual split time for phase 15, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "315": {
+        "Name": "Actual Split 16",
+        "Description": "Actual split time for phase 16, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "316": {
+        "Name": "Actual Cycle Length",
+        "Description": "Actual Cycle Time, recorded at end of cycle during coordination.",
+        "ParameterDescription": "Cycle Length in Seconds"
+    },
+    "317": {
+        "Name": "Actual Natural Cycle Length",
+        "Description": "Actual Natural Cycle Time, recorded at reference point during free or transition.",
+        "ParameterDescription": "Cycle Length in Seconds"
+    },
+    "318": {
+        "Name": "Actual Cycle Offset",
+        "Description": "Actual Cycle Offset, recorded at end of cycle during coordination or at reference point during free or transition.",
+        "ParameterDescription": "Offset Time in Seconds"
+    },
+    "319": {
+        "Name": "Sequence Change Request",
+        "Description": "Phase sequence change has been requested.",
+        "ParameterDescription": "Sequence #"
+    },
+    "320": {
+        "Name": "Master Cycle Zero",
+        "Description": "Master Cycle Zero point",
+        "ParameterDescription": "Tine since last reference point."
+    },
+    "321": {
+        "Name": "Coord - Oversize Ped",
+        "Description": "Oversized ped served in coord",
+        "ParameterDescription": "Phase #"
+    },
+    "322": {
+        "Name": "TSP Delay Time",
+        "Description": "Tracks the time from TSP arrival to when TSP phase service begins.",
+        "ParameterDescription": "Time in Sec"
+    },
+    "323": {
+        "Name": "Coord Pattern Selected",
+        "Description": "A new coord pattern has been selected",
+        "ParameterDescription": "Selected Pattern #"
+    },
+    "324": {
+        "Name": "Actual Split 17",
+        "Description": "Actual split time for phase 17, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "325": {
+        "Name": "Actual Split 18",
+        "Description": "Actual split time for phase 18, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "326": {
+        "Name": "Actual Split 19",
+        "Description": "Actual split time for phase 19, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "327": {
+        "Name": "Actual Split 20",
+        "Description": "Actual split time for phase 20, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "328": {
+        "Name": "Actual Split 21",
+        "Description": "Actual split time for phase 21, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "329": {
+        "Name": "Actual Split 22",
+        "Description": "Actual split time for phase 22, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "330": {
+        "Name": "Actual Split 23",
+        "Description": "Actual split time for phase 23, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "331": {
+        "Name": "Actual Split 24",
+        "Description": "Actual split time for phase 24, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "332": {
+        "Name": "Actual Split 25",
+        "Description": "Actual split time for phase 25, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "333": {
+        "Name": "Actual Split 26",
+        "Description": "Actual split time for phase 26, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "334": {
+        "Name": "Actual Split 27",
+        "Description": "Actual split time for phase 27, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "335": {
+        "Name": "Actual Split 28",
+        "Description": "Actual split time for phase 28, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "336": {
+        "Name": "Actual Split 29",
+        "Description": "Actual split time for phase 29, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "337": {
+        "Name": "Actual Split 30",
+        "Description": "Actual split time for phase 30, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "338": {
+        "Name": "Actual Split 31",
+        "Description": "Actual split time for phase 31, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "339": {
+        "Name": "Actual Split 32",
+        "Description": "Actual split time for phase 32, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "340": {
+        "Name": "Actual Split 33",
+        "Description": "Actual split time for phase 33, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "341": {
+        "Name": "Actual Split 34",
+        "Description": "Actual split time for phase 34, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "342": {
+        "Name": "Actual Split 35",
+        "Description": "Actual split time for phase 35, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "343": {
+        "Name": "Actual Split 36",
+        "Description": "Actual split time for phase 36, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "344": {
+        "Name": "Actual Split 37",
+        "Description": "Actual split time for phase 37, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "345": {
+        "Name": "Actual Split 38",
+        "Description": "Actual split time for phase 38, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "346": {
+        "Name": "Actual Split 39",
+        "Description": "Actual split time for phase 39, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "347": {
+        "Name": "Actual Split 40",
+        "Description": "Actual split time for phase 40, recorded at end of phase clearance.",
+        "ParameterDescription": "Split Time in Seconds"
+    },
+    "348": {
+        "Name": "Programmed Split 17 Change",
+        "Description": "Programmed split time for phase 17 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "349": {
+        "Name": "Programmed Split 18 Change",
+        "Description": "Programmed split time for phase 18 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "350": {
+        "Name": "Programmed Split 19 Change",
+        "Description": "Programmed split time for phase 19 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "351": {
+        "Name": "Programmed Split 20 Change",
+        "Description": "Programmed split time for phase 20 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "352": {
+        "Name": "Programmed Split 21 Change",
+        "Description": "Programmed split time for phase 21 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "353": {
+        "Name": "Programmed Split 22 Change",
+        "Description": "Programmed split time for phase 22 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "354": {
+        "Name": "Programmed Split 23 Change",
+        "Description": "Programmed split time for phase 23 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "355": {
+        "Name": "Programmed Split 24 Change",
+        "Description": "Programmed split time for phase 24 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "356": {
+        "Name": "Programmed Split 25 Change",
+        "Description": "Programmed split time for phase 25 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "357": {
+        "Name": "Programmed Split 26 Change",
+        "Description": "Programmed split time for phase 26 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "358": {
+        "Name": "Programmed Split 27 Change",
+        "Description": "Programmed split time for phase 27 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "359": {
+        "Name": "Programmed Split 28 Change",
+        "Description": "Programmed split time for phase 28 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "360": {
+        "Name": "Programmed Split 29 Change",
+        "Description": "Programmed split time for phase 29 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "361": {
+        "Name": "Programmed Split 30 Change",
+        "Description": "Programmed split time for phase 30 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "362": {
+        "Name": "Programmed Split 31 Change",
+        "Description": "Programmed split time for phase 31 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "363": {
+        "Name": "Programmed Split 32 Change",
+        "Description": "Programmed split time for phase 32 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "364": {
+        "Name": "Programmed Split 33 Change",
+        "Description": "Programmed split time for phase 33 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "365": {
+        "Name": "Programmed Split 34 Change",
+        "Description": "Programmed split time for phase 34 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "366": {
+        "Name": "Programmed Split 35 Change",
+        "Description": "Programmed split time for phase 35 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "367": {
+        "Name": "Programmed Split 36 Change",
+        "Description": "Programmed split time for phase 36 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "368": {
+        "Name": "Programmed Split 37 Change",
+        "Description": "Programmed split time for phase 37 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "369": {
+        "Name": "Programmed Split 38 Change",
+        "Description": "Programmed split time for phase 38 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "370": {
+        "Name": "Programmed Split 39 Change",
+        "Description": "Programmed split time for phase 39 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "371": {
+        "Name": "Programmed Split 40 Change",
+        "Description": "Programmed split time for phase 40 has changed.",
+        "ParameterDescription": "New Split Time in Seconds"
+    },
+    "400": {
+        "Name": "Time Drift",
+        "Description": "Recorded controller time drift.",
+        "ParameterDescription": "Time drift in Seconds"
+    },
+    "500": {
+        "Name": "Total Comm Attempts",
+        "Description": "Total number of communication attempts in last period. Recorded by Maxview.",
+        "ParameterDescription": "Number of attempts"
+    },
+    "501": {
+        "Name": "Failed Comm Attempts",
+        "Description": "Number of failed communication attempts in last period. Recorded by Maxview.",
+        "ParameterDescription": "Number of attempts"
+    },
+    "502": {
+        "Name": "Percent Comm Loss",
+        "Description": "Percentage of failed communication attempts in last period. Recorded by Maxview.",
+        "ParameterDescription": "Percent"
+    },
+    "503": {
+        "Name": "Average Comm Response Time",
+        "Description": "Average communication response time during the last period. Recorded by Maxview.",
+        "ParameterDescription": "Time in ms"
+    },
+    "517": {
+        "Name": "TSP Hold Time",
+        "Description": "The amount of time the TSP request held the active phase past the programmed forceoff or max green time.",
+        "ParameterDescription": "Time in Sec"
+    },
+    "518": {
+        "Name": "TSP Early Term Time",
+        "Description": "The amount time the TSP request terminated the active phase before the programmed forceoff or max green time.",
+        "ParameterDescription": "Time in Sec"
+    },
+    "519": {
+        "Name": "TSP Delay Begin",
+        "Description": "Set when the TSP delay interval begins.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "520": {
+        "Name": "TSP Delay End",
+        "Description": "Set when the TSP delay interval ends.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "521": {
+        "Name": "TSP Arrival",
+        "Description": "Set when the TSP arrival time is expired.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "600": {
+        "Name": "Sequence Entry",
+        "Description": "Set when a new sequence is started",
+        "ParameterDescription": "Sequence #"
+    },
+    "601": {
+        "Name": "Pri/Pre Det Low On",
+        "Description": "Set when pri/pre detector low priority call (pulsing) is received.",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "602": {
+        "Name": "Pri/Pre Det Low Off",
+        "Description": "Set when pri/pre detector low priority call (pulsing) is cleared.",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "603": {
+        "Name": "Pri/Pre Det High On",
+        "Description": "Set when pri/pre detector high priority call (steady) is received",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "604": {
+        "Name": "Pri/Pre Det High Off",
+        "Description": "Set when pri/pre detector high priority call (steady) is cleared",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "605": {
+        "Name": "Pri/Pre Det Fault - No Activity",
+        "Description": "No Activity fault has occurred on a Pri/Pre detector.",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "606": {
+        "Name": "Pri/Pre Det Fault - Max Presence",
+        "Description": "Max Presence fault has occurred on a Pri/Pre detector.",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "607": {
+        "Name": "Pri/Pre Det Fault - Erratic Count",
+        "Description": "Erratic Count fault has occurred on a Pri/Pre detector.",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "608": {
+        "Name": "Pri/Pre Det Fault - Cleared",
+        "Description": "Set when all faults have been cleared on a Pri/Pre detector.",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "609": {
+        "Name": "Pri/Pre Det Fault - Active",
+        "Description": "Set when any fault is active on a Pri/Pre detector.",
+        "ParameterDescription": "Pri/Pre Detector #"
+    },
+    "610": {
+        "Name": "TSP Begin Service",
+        "Description": "Prioritor service is started.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "611": {
+        "Name": "TSP End Service",
+        "Description": "Prioritor service has ended.",
+        "ParameterDescription": "Prioritor #"
+    },
+    "612": {
+        "Name": "Phase 1 Wait Time",
+        "Description": "Recorded wait time for phase 1.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "613": {
+        "Name": "Phase 2 Wait Time",
+        "Description": "Recorded wait time for phase 2.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "614": {
+        "Name": "Phase 3 Wait Time",
+        "Description": "Recorded wait time for phase 3.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "615": {
+        "Name": "Phase 4 Wait Time",
+        "Description": "Recorded wait time for phase 4.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "616": {
+        "Name": "Phase 5 Wait Time",
+        "Description": "Recorded wait time for phase 5.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "617": {
+        "Name": "Phase 6 Wait Time",
+        "Description": "Recorded wait time for phase 6.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "618": {
+        "Name": "Phase 7 Wait Time",
+        "Description": "Recorded wait time for phase 7.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "619": {
+        "Name": "Phase 8 Wait Time",
+        "Description": "Recorded wait time for phase 8.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "620": {
+        "Name": "Phase 9 Wait Time",
+        "Description": "Recorded wait time for phase 9.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "621": {
+        "Name": "Phase 10 Wait Time",
+        "Description": "Recorded wait time for phase 10.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "622": {
+        "Name": "Phase 11 Wait Time",
+        "Description": "Recorded wait time for phase 11.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "623": {
+        "Name": "Phase 12 Wait Time",
+        "Description": "Recorded wait time for phase 12.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "624": {
+        "Name": "Phase 13 Wait Time",
+        "Description": "Recorded wait time for phase 13.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "625": {
+        "Name": "Phase 14 Wait Time",
+        "Description": "Recorded wait time for phase 14.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "626": {
+        "Name": "Phase 15 Wait Time",
+        "Description": "Recorded wait time for phase 15.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "627": {
+        "Name": "Phase 16 Wait Time",
+        "Description": "Recorded wait time for phase 16.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "628": {
+        "Name": "Phase 17 Wait Time",
+        "Description": "Recorded wait time for phase 17.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "629": {
+        "Name": "Phase 18 Wait Time",
+        "Description": "Recorded wait time for phase 18.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "630": {
+        "Name": "Phase 19 Wait Time",
+        "Description": "Recorded wait time for phase 19.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "631": {
+        "Name": "Phase 20 Wait Time",
+        "Description": "Recorded wait time for phase 20.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "632": {
+        "Name": "Phase 21 Wait Time",
+        "Description": "Recorded wait time for phase 21.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "633": {
+        "Name": "Phase 22 Wait Time",
+        "Description": "Recorded wait time for phase 22.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "634": {
+        "Name": "Phase 23 Wait Time",
+        "Description": "Recorded wait time for phase 23.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "635": {
+        "Name": "Phase 24 Wait Time",
+        "Description": "Recorded wait time for phase 24.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "636": {
+        "Name": "Phase 25 Wait Time",
+        "Description": "Recorded wait time for phase 25.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "637": {
+        "Name": "Phase 26 Wait Time",
+        "Description": "Recorded wait time for phase 26.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "638": {
+        "Name": "Phase 27 Wait Time",
+        "Description": "Recorded wait time for phase 27.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "639": {
+        "Name": "Phase 28 Wait Time",
+        "Description": "Recorded wait time for phase 28.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "640": {
+        "Name": "Phase 29 Wait Time",
+        "Description": "Recorded wait time for phase 29.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "641": {
+        "Name": "Phase 30 Wait Time",
+        "Description": "Recorded wait time for phase 30.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "642": {
+        "Name": "Phase 31 Wait Time",
+        "Description": "Recorded wait time for phase 31.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "643": {
+        "Name": "Phase 32 Wait Time",
+        "Description": "Recorded wait time for phase 32.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "644": {
+        "Name": "Phase 33 Wait Time",
+        "Description": "Recorded wait time for phase 33.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "645": {
+        "Name": "Phase 34 Wait Time",
+        "Description": "Recorded wait time for phase 34.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "646": {
+        "Name": "Phase 35 Wait Time",
+        "Description": "Recorded wait time for phase 35.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "647": {
+        "Name": "Phase 36 Wait Time",
+        "Description": "Recorded wait time for phase 36.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "648": {
+        "Name": "Phase 37 Wait Time",
+        "Description": "Recorded wait time for phase 37.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "649": {
+        "Name": "Phase 38 Wait Time",
+        "Description": "Recorded wait time for phase 38.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "650": {
+        "Name": "Phase 39 Wait Time",
+        "Description": "Recorded wait time for phase 39.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "651": {
+        "Name": "Phase 40 Wait Time",
+        "Description": "Recorded wait time for phase 40.",
+        "ParameterDescription": "Wait Time in Seconds"
+    },
+    "701": {
+        "Name": "External Min Call On",
+        "Description": "External Phase Min Call received.",
+        "ParameterDescription": "Phase #"
+    },
+    "702": {
+        "Name": "External Min Call Off",
+        "Description": "External Phase Min Call removed.",
+        "ParameterDescription": "Phase #"
+    },
+    "703": {
+        "Name": "External Max Call On",
+        "Description": "External Phase Max Call received.",
+        "ParameterDescription": "Phase #"
+    },
+    "704": {
+        "Name": "External Max Call Off",
+        "Description": "External Phase Max Call removed.",
+        "ParameterDescription": "Phase #"
+    },
+    "705": {
+        "Name": "External Ped Call On",
+        "Description": "External Ped Call received.",
+        "ParameterDescription": "Phase #"
+    },
+    "706": {
+        "Name": "External Ped Call Off",
+        "Description": "External Ped Call removed.",
+        "ParameterDescription": "Phase #"
+    },
+    "707": {
+        "Name": "External Preempt Call On",
+        "Description": "External Preempt Call received.",
+        "ParameterDescription": "Preempt #"
+    },
+    "708": {
+        "Name": "External Preempt Call Off",
+        "Description": "External Preempt Call removed.",
+        "ParameterDescription": "Preempt #"
+    },
+    "709": {
+        "Name": "External Special Function Call On",
+        "Description": "External Special Function Call received",
+        "ParameterDescription": "Special Function #"
+    },
+    "710": {
+        "Name": "External Special Function Call Off",
+        "Description": "External Special Function Call removed.",
+        "ParameterDescription": "Special Function #"
+    },
+    "711": {
+        "Name": "Max 3 In-Effect",
+        "Description": "Set when maximum green (MAX 3) interval is in-effect for the active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "712": {
+        "Name": "Conditional Max In-Effect",
+        "Description": "Set when maximum green (Conditional MAX) interval is in-effect for the active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "713": {
+        "Name": "Preempt Exit Max In-Effect",
+        "Description": "Set when maximum green (Preempt Exit Max) interval is in-effect for the active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "714": {
+        "Name": "Coord Free Max In Effect",
+        "Description": "Set when maximum green (Coord Free Max) interval is in-effect for the active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "715": {
+        "Name": "TSP Max In-Effect",
+        "Description": "Set when maximum green (RSP Max) interval is in-effect for the active phase.",
+        "ParameterDescription": "Phase #"
+    },
+    "900": {
+        "Name": "Non Concurrent Phases",
+        "Description": "Non Concurrent Phases detected.",
+        "ParameterDescription": "Ring #"
+    },
+    "901": {
+        "Name": "Barrier Entry Ring 1",
+        "Description": "Barrier Entry Ring 1",
+        "ParameterDescription": "Barrier #"
+    },
+    "902": {
+        "Name": "Barrier Entry Ring 2",
+        "Description": "Barrier Entry Ring 2",
+        "ParameterDescription": "Barrier #"
+    },
+    "903": {
+        "Name": "Barrier Entry Ring 3",
+        "Description": "Barrier Entry Ring 3",
+        "ParameterDescription": "Barrier #"
+    },
+    "904": {
+        "Name": "Barrier Entry Ring 4",
+        "Description": "Barrier Entry Ring 4",
+        "ParameterDescription": "Barrier #"
+    },
+    "905": {
+        "Name": "Barrier Entry Ring 5",
+        "Description": "Barrier Entry Ring 5",
+        "ParameterDescription": "Barrier #"
+    },
+    "906": {
+        "Name": "Barrier Entry Ring 6",
+        "Description": "Barrier Entry Ring 6",
+        "ParameterDescription": "Barrier #"
+    },
+    "907": {
+        "Name": "Barrier Entry Ring 7",
+        "Description": "Barrier Entry Ring 7",
+        "ParameterDescription": "Barrier #"
+    },
+    "908": {
+        "Name": "Barrier Entry Ring 8",
+        "Description": "Barrier Entry Ring 8",
+        "ParameterDescription": "Barrier #"
+    },
+    "909": {
+        "Name": "Barrier Entry Ring 9",
+        "Description": "Barrier Entry Ring 9",
+        "ParameterDescription": "Barrier #"
+    },
+    "910": {
+        "Name": "Barrier Entry Ring 10",
+        "Description": "Barrier Entry Ring 10",
+        "ParameterDescription": "Barrier #"
+    },
+    "911": {
+        "Name": "Barrier Entry Ring 11",
+        "Description": "Barrier Entry Ring 11",
+        "ParameterDescription": "Barrier #"
+    },
+    "912": {
+        "Name": "Barrier Entry Ring 12",
+        "Description": "Barrier Entry Ring 12",
+        "ParameterDescription": "Barrier #"
+    },
+    "913": {
+        "Name": "Barrier Entry Ring 13",
+        "Description": "Barrier Entry Ring 13",
+        "ParameterDescription": "Barrier #"
+    },
+    "914": {
+        "Name": "Barrier Entry Ring 14",
+        "Description": "Barrier Entry Ring 14",
+        "ParameterDescription": "Barrier #"
+    },
+    "915": {
+        "Name": "Barrier Entry Ring 15",
+        "Description": "Barrier Entry Ring 15",
+        "ParameterDescription": "Barrier #"
+    },
+    "916": {
+        "Name": "Barrier Entry Ring 16",
+        "Description": "Barrier Entry Ring 16",
+        "ParameterDescription": "Barrier #"
+    }
+}

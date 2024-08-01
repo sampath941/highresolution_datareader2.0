@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Connect to Controller</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Connect to a Controller</h1>
+    <form action="{{ url_for('main.connect') }}" method="post">
+        <label for="ip_address">IP Address:</label>
+        <input type="text" name="ip_address" id="ip_address" required>
+        <label for="username">Linux Username:</label>
+        <input type="text" name="username" id="username" required>
+        <label for="password">Linux Password:</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit" style="margin-top: 20px;"> Connect </button>
+    </form>
+    <a href="{{ url_for('main.index') }}">Back to Home</a>
+</body>
+</html>
