@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Optionally, remove the message after a few seconds
         setTimeout(() => {
             container.removeChild(messageElement);
-        }, 5000); // Removes the message after 5 seconds
+        }, 10000); // Removes the message after 10 seconds
     }
     console.log('DOM fully loaded');
     console.log('script-js - 3')
@@ -43,12 +43,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.blob(); // Get the response as a Blob
             })
             .then(blob => {
-                const dataFormat = document.getElementById('data_format').value;
+                console.log('Line 46')
+                const dataFormat = document.querySelector('input[name="data_format"]:checked').value;
                 const filename = document.getElementById('filename').value;
-                const extension = dataFormat === 'csv' ? 'csv' : 'xlsx';
+                const extension = dataFormat === 'xlsx' ? 'csv' : 'xlsx';
                 const downloadUrl = URL.createObjectURL(blob);
 
                 // Create a temporary link element and trigger the download
+                console.log('Line 53')
                 const downloadLink = document.createElement('a');
                 downloadLink.href = downloadUrl;
                 downloadLink.download = `${filename}.${extension}`;

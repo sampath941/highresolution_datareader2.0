@@ -39,10 +39,13 @@ def connect_controller(ip_address, username, password):
     tempfilepath = os.path.join(Config.TEMPORARY_FILES_DIR, 'filefromcontroller')
     try:
         ssh.connect(hostname=ip_address, port=22, username=username, password=password)
-        with SCPClient(ssh.get_transport()) as scp:
-            scp.get('/tmp/asclog.db', tempfilepath)
-        return tempfilepath, True, "Successfully connected"
-    except Exception as e:
-        return False, str(e)
+        try:
+            with SCPClient(ssh.get_transport()) as scp:
+                scp.get('/tmp/asclog.db', tempfilepath)
+            return tempfilepath, True, "Successfully connected and file transferred"
+        except Exception as scp_error:
+            return None, False, f"Failed to transfer file: {scp_error}"
+    except Exception as ssh_error:
+        return None, False, f"SSH connection failed: {ssh_error}"
     finally:
         ssh.close()

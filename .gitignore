@@ -1,4 +1,4 @@
-samenv/
+/venv7
 __pycache__/
 *.pyc
 *.pyo

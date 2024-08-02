@@ -17,12 +17,15 @@
     </nav>
     <main>
         <form action="{{ url_for('main.save') }}" method="post" enctype="multipart/form-data" id="save-form">
-            <label for="data_format">Select Data Format:</label>
-            <select name="data_format" id="data_format">
-                <option value="csv">CSV</option>
-                <option value="excel">Excel</option>
-            </select>
-            <label for="filename">Enter Filename:</label>
+            <label for="data_format">File Export Format:</label>
+            <div class="radio-group">
+                <input type="radio" id="csv" name="data_format" value="csv" checked>
+                <label for="csv">CSV</label>
+            
+                <input type="radio" id="excel" name="data_format" value="excel">
+                <label for="excel">Excel</label>
+            </div>
+            <label for="filename">Choose Filename:</label>
             <input type="text" name="filename" id="filename" required>
             <button type="submit">Export to PC</button>
             <button onclick="window.location.reload(true);">Refresh Page</button>

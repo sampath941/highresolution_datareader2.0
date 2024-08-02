@@ -36,7 +36,7 @@ def upload():
             filepath = os.path.join(app.config['UPLOADS_DIR'], filename)
             file.save(filepath)
             session['uploaded_filepath'] = filepath  # Store filename in session
-            flash('File successfully uploaded', 'success')
+            flash('File successfully uploaded. Please give any filename and export it to your PC', 'success')
             return redirect(url_for('main.index'))
         else:
             flash('No file selected', 'danger')
@@ -51,7 +51,7 @@ def connect():
         filepath, success, message = connect_controller(ip_address, username, password)
         if success:
             session['uploaded_filepath'] = filepath
-            flash('Successfully connected to the controller and file retrieved', 'success')
+            flash('Successfully connected to the controller and file retrieved. Please give any filename and export it to your PC ', 'success')
         else:
             flash(message, 'danger')
         return redirect(url_for('main.index'))

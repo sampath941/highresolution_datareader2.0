@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload .db File</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='scripts.js') }}" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Upload .db File</h1>
-    </header>
-    <main>
-        <form action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data">
-            <label for="file">Select .db File:</label>
+    <h1 class="page-title">Upload .db File</h1>
+    <form action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data">
+        <div class="file-upload-container">
+            <label for="file" class="file-label">Select .db File:</label>
             <input type="file" name="file" id="file" required>
-            <button type="submit">Upload</button>
-        </form>
-    </main>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="form-button">Upload</button>
+            <a href="{{ url_for('main.index') }}" class="form-button">Back to Home</a>
+        </div>
+    </form>
 </body>
 </html>
+
+
