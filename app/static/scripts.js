@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Line 46')
                 const dataFormat = document.querySelector('input[name="data_format"]:checked').value;
                 const filename = document.getElementById('filename').value;
-                const extension = dataFormat === 'xlsx' ? 'csv' : 'xlsx';
+                const extension = dataFormat === 'xlsx' ? 'xlsx' : 'csv';
                 const downloadUrl = URL.createObjectURL(blob);
 
                 // Create a temporary link element and trigger the download

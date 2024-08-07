@@ -60,6 +60,7 @@ def connect():
 @main.route('/save', methods=['POST'])
 def save():
     data_format = request.form.get('data_format')
+    logging.info('Data Format selected is', data_format)
     filename = request.form.get('filename')
     filepath = session.get('uploaded_filepath')
     logging.debug(' I am in Save Function, Line 65')
@@ -81,8 +82,10 @@ def save():
 
         logging.debug(f"Sending file {file_path} as {filename}")
         if file_path:
+            logging.info(filename)
             logging.info('main.py - line 84')
             flash('File successfully saved', 'success')
+            logging.info
             return send_file(file_path, as_attachment=True, download_name=filename)
     finally:
             flash('File successfully saved', 'success')
