@@ -27,10 +27,14 @@
             </div>
             <label for="filename">Choose Filename:</label>
             <input type="text" name="filename" id="filename" required>
-            <button type="submit">Export to PC</button>
-            <button onclick="window.location.reload(true);">Refresh Page</button>
+            <button type="submit" class="{{ 'button-disabled' if not export_enabled else '' }}" {{ 'disabled' if not export_enabled else '' }}>Export to PC</button>
+            <button type="button" onclick="window.location.reload(true);">Refresh Page</button>
         </form>
-        <!-- <iframe id="hidden-iframe" name="hidden-iframe" style="display:none;"></iframe> -->
+        
+        <div id="progress-container">
+            <div id="progress-bar">0%</div>
+        </div>
+
         <div id="messages-container">
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
@@ -45,5 +49,3 @@
     </main>
 </body>
 </html>
-
-

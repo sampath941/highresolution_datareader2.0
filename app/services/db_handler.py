@@ -8,29 +8,33 @@ from config import Config
 
 
 def fetch_data_from_db(filename):
-    print(filename)
     if not os.path.exists(filename):
-       print(f"Database file does not exist: {filename}")
-    else:
-        print(f"Database file found: {filename}")
+        print(f"Database file does not exist: {filename}")
+        return None
+
     con = sqlite3.connect(filename)
     cursor = con.cursor()
-    cursor.execute("SELECT sqlite_version();")
+
+    # Fetch all table names
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tables = cursor.fetchall()
-    print("Tables in the database:")
+
+    dataframes = {}
+
+    # Loop through each table and fetch data
     for table in tables:
-        print(table[0])
-    version = cursor.fetchone()
-    if version is None:
-     print("Failed to retrieve SQLite version.")
-    else:
-     print(f"SQLite version: {version[0]}")
-    cursor.execute('SELECT * FROM Event')
-    rows = cursor.fetchall()
-    columns = [description[0] for description in cursor.description]
+        table_name = table[0]
+        print(f"Fetching data from table: {table_name}")
+
+        cursor.execute(f"SELECT * FROM {table_name}")
+        rows = cursor.fetchall()
+        columns = [description[0] for description in cursor.description]
+
+        # Store the DataFrame in a dictionary with the table name as the key
+        dataframes[table_name] = pd.DataFrame(rows, columns=columns)
+
     con.close()
-    return pd.DataFrame(rows, columns=columns)
+    return dataframes
     
 
 def connect_controller(ip_address, username, password):

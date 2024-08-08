@@ -237,3 +237,24 @@ form {
     font-weight: normal; /* Adjust the font style as needed */
     cursor: pointer;
 }
+
+#progress-container {
+    display: none;
+    width: 100%;
+    background-color: black;
+    margin-top: 20px;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 30px;
+    background-color: #4caf50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+
+button:disabled, .button-disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}

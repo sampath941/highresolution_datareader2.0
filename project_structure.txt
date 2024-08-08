@@ -7,6 +7,9 @@
     project_structure.txt
     requirements.txt
     run.py
+    test_app.py
+    .azure/
+        config
     app/
         asclog.db
         utils.py
@@ -30,5 +33,8 @@
             index.html
             upload.html
     uploads/
+        asclog.db
+        asclog.db-shm
+        asclog.db-wal
         event_codes.json
-        happyevents.db
+        Orangethrorpe__Lemon652023.db

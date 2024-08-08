@@ -6,7 +6,10 @@ import sys
 from app.services import logging_config
 from config import Config
 import logging
+import zipfile
 from werkzeug.utils import secure_filename
+import sqlite3
+import shutil
 
 # Add 'utils' directory to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
@@ -25,7 +28,8 @@ eventcodes_path = os.path.join(Config.BASE_DIR, 'event_codes.json')
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    export_enabled = session.get('export_enabled', False)
+    return render_template('index.html', export_enabled=export_enabled) 
 
 @main.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -36,6 +40,7 @@ def upload():
             filepath = os.path.join(app.config['UPLOADS_DIR'], filename)
             file.save(filepath)
             session['uploaded_filepath'] = filepath  # Store filename in session
+            session['export_enabled'] = True
             flash('File successfully uploaded. Please give any filename and export it to your PC', 'success')
             return redirect(url_for('main.index'))
         else:
@@ -51,6 +56,7 @@ def connect():
         filepath, success, message = connect_controller(ip_address, username, password)
         if success:
             session['uploaded_filepath'] = filepath
+            session['export_enabled'] = True
             flash('Successfully connected to the controller and file retrieved. Please give any filename and export it to your PC ', 'success')
         else:
             flash(message, 'danger')
@@ -60,7 +66,7 @@ def connect():
 @main.route('/save', methods=['POST'])
 def save():
     data_format = request.form.get('data_format')
-    logging.info('Data Format selected is', data_format)
+    logging.info('Data Format selected is %s', data_format)
     filename = request.form.get('filename')
     filepath = session.get('uploaded_filepath')
     logging.debug(' I am in Save Function, Line 65')
@@ -76,23 +82,61 @@ def save():
 
     try:
         if data_format == 'csv':
-            file_path = save_as_csv(filepath, eventcodes_path, filename)
+            file_paths = save_as_csv(filepath, eventcodes_path, filename)
+            if file_paths:
+                zip_filename = f"{os.path.splitext(filename)[0]}.zip"
+                zip_filepath = os.path.join(Config.TEMPORARY_FILES_DIR, zip_filename)
+                with zipfile.ZipFile(zip_filepath, 'w') as zipf:
+                    for file in file_paths:
+                        zipf.write(file, os.path.basename(file))
+                        os.remove(file)  # Clean up individual CSV files after zipping
+                logging.debug(f"Sending zip file {zip_filepath} as {zip_filename}")
+                flash('File successfully saved', 'success')
+                response = send_file(zip_filepath, as_attachment=True, download_name=zip_filename)
+                response.call_on_close(lambda: cleanup(zip_filepath))
+                return response
         else:
             file_path = save_as_excel(filepath, eventcodes_path, filename)
+            logging.debug(f"Sending file {file_path} as {filename}")
+            if file_path:
+                logging.info(filename)
+                logging.info('main.py - line 84')
+                response = send_file(file_path, as_attachment=True, download_name=filename)
+                response.call_on_close(lambda: cleanup(file_path))
+                return response
+    except sqlite3.DatabaseError as e:
+        logging.error(f"Database error: {e}")
+        flash('Failed to process the database file. The database might be corrupted.', 'danger')
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        flash('An unexpected error occurred.', 'danger')
 
-        logging.debug(f"Sending file {file_path} as {filename}")
-        if file_path:
-            logging.info(filename)
-            logging.info('main.py - line 84')
-            flash('File successfully saved', 'success')
-            logging.info
-            return send_file(file_path, as_attachment=True, download_name=filename)
     finally:
-            flash('File successfully saved', 'success')
+        try:
             os.remove(filepath)
-            session.clear()  # Clean up the uploaded file
-
+        except PermissionError:
+            logging.error(f"Permission error: Could not remove file {filepath}")
+        except Exception as e:
+            logging.error(f"Error removing file {filepath}: {e}")
+        session.clear()
     return redirect(url_for('main.index'))
+        
+        # Delete all temporary files in the temporary directory
+def cleanup(file_path):
+    # Delete the file
+    try:
+        os.remove(file_path)
+        logging.info(f"Temporary file {file_path} removed.")
+    except Exception as e:
+        logging.error(f"Error removing temporary file {file_path}: {e}")
+    # Delete all temporary files in the temporary directory
+    temp_dir = Config.TEMPORARY_FILES_DIR
+    if os.path.exists(temp_dir):
+        try:
+            shutil.rmtree(temp_dir)
+            logging.info(f"Temporary directory {temp_dir} removed.")
+        except Exception as e:
+            logging.error(f"Error removing temporary directory {temp_dir}: {e}")
 
 
 if __name__ == '__main__':
