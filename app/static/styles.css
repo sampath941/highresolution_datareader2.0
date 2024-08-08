@@ -96,6 +96,9 @@ button:hover {
 
 #messages-container {
     margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
 }
 
 .flashes {
@@ -115,7 +118,10 @@ button:hover {
 }
 
 .success {
-    background-color: #929e7a; /* Green */
+    background-color: #4caf50; /* Green */
+    border: 1px solid #4caf50;
+    font-size: 20px;
+    color: white;
 }
 
 .warning {

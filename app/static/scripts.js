@@ -5,12 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         messageElement.textContent = message;
         messageElement.className = category; // Use this class for styling
         container.appendChild(messageElement);
-    
-        // Optionally, remove the message after a few seconds
-        setTimeout(() => {
-            container.removeChild(messageElement);
-        }, 10000); // Removes the message after 10 seconds
-    }
+        }
     console.log('DOM fully loaded');
     console.log('script-js - 3')
     // For the save form
@@ -45,8 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(blob => {
                 console.log('Line 46')
                 const dataFormat = document.querySelector('input[name="data_format"]:checked').value;
+                console.log ('The dataformat passed to js is', dataFormat)
                 const filename = document.getElementById('filename').value;
-                const extension = dataFormat === 'xlsx' ? 'xlsx' : 'csv';
+                const extension = dataFormat === 'excel' ? 'xlsx' : 'csv';
+                console.log ('The extension at line 51 is', extension)
                 const downloadUrl = URL.createObjectURL(blob);
 
                 // Create a temporary link element and trigger the download
@@ -62,10 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 flashMessage('File succesfully downloaded', 'success')
                 setTimeout(function() {
                     window.location.reload(true);  // Force a hard reload
-                }, 2000);
-
-                // flash('File successfully downloaded', 'success')
-                // alert('File successfully downloaded', 'success')
+                }, 4000);
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
