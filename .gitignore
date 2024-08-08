@@ -5,4 +5,3 @@ __pycache__/
 instance/
 .env
 /temporary_files
-/uploads

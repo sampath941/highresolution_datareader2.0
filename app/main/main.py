@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, send_file, get_flashed_messages, session
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, send_file, get_flashed_messages, session, jsonify
 from ..services.file_operations import save_as_csv, save_as_excel
 from ..services.db_handler import fetch_data_from_db, connect_controller
 import os
@@ -37,7 +37,9 @@ def upload():
         file = request.files.get('file')
         if file and file.filename != '':
             filename = secure_filename(file.filename)
-            filepath = os.path.join(app.config['UPLOADS_DIR'], filename)
+            save_upload_dir = Config.UPLOADS_DIR
+            os.makedirs(save_upload_dir, exist_ok=True)
+            filepath = os.path.join(save_upload_dir, filename)
             file.save(filepath)
             session['uploaded_filepath'] = filepath  # Store filename in session
             session['export_enabled'] = True
@@ -53,13 +55,16 @@ def connect():
         ip_address = request.form['ip_address']
         username = request.form['username']
         password = request.form['password']
-        filepath, success, message = connect_controller(ip_address, username, password)
+        file_source = request.form['file_source']
+        filepath, success, message = connect_controller(ip_address, username, password, file_source)
         if success:
             session['uploaded_filepath'] = filepath
             session['export_enabled'] = True
-            flash('Successfully connected to the controller and file retrieved. Please give any filename and export it to your PC ', 'success')
+            flash('File successfully retrieved. Please give desired filename and export it to your PC ', 'success')
+#            return jsonify({'success': True, 'filepath': filepath, 'message': message})
         else:
-            flash(message, 'danger')
+            flash('Cannot get the file, please check if the file exists in the correct folder. Please refresh the page and try again', 'error')
+            logging.info('you did not get the file')
         return redirect(url_for('main.index'))
     return render_template('connect.html')
 

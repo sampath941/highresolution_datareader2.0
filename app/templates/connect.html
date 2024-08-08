@@ -14,6 +14,24 @@
         <input type="text" name="username" id="username" required>
         <label for="password">Linux Password:</label>
         <input type="password" name="password" id="password" required>
+        <fieldset>
+            <legend>Select File Source</legend>
+            <div class="custom-radio">
+                <input type="radio" name="file_source" value="active" id="active" required>
+                <span></span>
+                <label for="active">Get active high-res file</label>
+            </div>
+            <div class="custom-radio">
+                <input type="radio" name="file_source" value="usb" id="usb">
+                <span></span>
+                <label for="usb">Get file from USB</label>
+            </div>
+            <div class="custom-radio">
+                <input type="radio" name="file_source" value="sd_card" id="sd_card">
+                <span></span>
+                <label for="sd_card">Get file from SD_Card</label>
+            </div>
+        </fieldset>
         <div class="button-container">
             <button type="submit" class="form-button">Get File</button>
             <a href="{{ url_for('main.index') }}" class="form-button"> Back to Home </a>

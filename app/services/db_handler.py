@@ -4,6 +4,7 @@ from scp import SCPClient
 import os
 import pandas as pd
 from config import Config
+from flask import flash
 
 
 
@@ -37,19 +38,27 @@ def fetch_data_from_db(filename):
     return dataframes
     
 
-def connect_controller(ip_address, username, password):
+def connect_controller(ip_address, username, password, file_source):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     tempfilepath = os.path.join(Config.TEMPORARY_FILES_DIR, 'filefromcontroller')
+    source_paths = {
+        'active': '/tmp/asclog.db',
+        'usb': '/media/usb/asclog.db',
+        'sd_card': '/media/sdcard/asclog.db'
+    }
+    source_path = source_paths.get(file_source)
     try:
         ssh.connect(hostname=ip_address, port=22, username=username, password=password)
+        flash('Connection to Controller is Successful', 'success')
         try:
             with SCPClient(ssh.get_transport()) as scp:
-                scp.get('/tmp/asclog.db', tempfilepath)
+                scp.get(source_path, tempfilepath)
             return tempfilepath, True, "Successfully connected and file transferred"
         except Exception as scp_error:
             return None, False, f"Failed to transfer file: {scp_error}"
     except Exception as ssh_error:
+        flash ('Cannot establish connection with controller', 'error')
         return None, False, f"SSH connection failed: {ssh_error}"
     finally:
         ssh.close()

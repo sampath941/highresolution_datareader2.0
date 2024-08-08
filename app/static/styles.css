@@ -66,7 +66,7 @@ form {
 }
 
 label {
-    margin: 20px 0 20px;
+    margin: 15px 0 15px;
     margin-top: 20 px;
 }
 
@@ -257,4 +257,47 @@ form {
 button:disabled, .button-disabled {
     background-color: grey;
     cursor: not-allowed;
+}
+
+/* Custom radio button styles */
+.custom-radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.custom-radio input[type="radio"] + span {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+}
+
+/* Custom radio button when checked */
+input[type="radio"]:checked + span {
+    background-color: #007bff;
+    box-shadow: 0 0 0 2px #0056b3;
+}
+
+/* Inner circle for checked radio button */
+input[type="radio"]:checked + span::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Label styles */
+.custom-radio label {
+    font-size: 16px;
+    color: #333;
 }
