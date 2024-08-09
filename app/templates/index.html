@@ -18,11 +18,14 @@
     <main>
         <form action="{{ url_for('main.save') }}" method="post" enctype="multipart/form-data" id="save-form">
             <label for="data_format">File Export Format:</label>
-            <div class="radio-group">
+            <div class="custom-radio">
                 <input type="radio" id="csv" name="data_format" value="csv" checked>
+                <span></span>
                 <label for="csv">CSV</label>
-            
+            <div>
+            </div class="custom-radio">
                 <input type="radio" id="excel" name="data_format" value="excel">
+                <span></span>
                 <label for="excel">Excel</label>
             </div>
             <label for="filename">Choose Filename:</label>
