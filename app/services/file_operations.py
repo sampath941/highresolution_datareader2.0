@@ -8,6 +8,7 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 import datetime
 from flask import Flask, request, send_file, redirect, url_for, flash
 from config import Config
+import shutil
 
 
 def save_as_csv(db_path, eventcodes_path, base_filename):
@@ -16,7 +17,7 @@ def save_as_csv(db_path, eventcodes_path, base_filename):
     if not final_dfs:
         print("No data fetched to save.")
         return
-    
+    # shutil.rmtree(Config.TEMPORARY_FILES_DIR)
     save_dir = Config.TEMPORARY_FILES_DIR # Temporary directory to save the files
     os.makedirs(save_dir, exist_ok=True)
     
@@ -46,6 +47,7 @@ def save_as_excel(db_path, eventcodes_path, filename):
         print("No data fetched to save.")
         return
     
+    shutil.rmtree(Config.TEMPORARY_FILES_DIR)
     save_dir = Config.TEMPORARY_FILES_DIR  # Temporary directory to save the file
     os.makedirs(save_dir, exist_ok=True)
     file_path = os.path.join(save_dir, filename)
