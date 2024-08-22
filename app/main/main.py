@@ -11,17 +11,23 @@ from werkzeug.utils import secure_filename
 import sqlite3
 import shutil
 import time
+from config import Config
+from app.main.routes import main as main_blueprint
+from app.main.simulation import simulation as simulation_blueprint  # Import the new blueprint
 
 # Add 'utils' directory to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
 
 # Create a blueprint for the main part of the application
-main = Blueprint('main', __name__)
-app = Flask(__name__)
-app.config.from_object(Config)
-logging_config.configure_logging()
-app.secret_key = 'your_secret_key'  # Set a secret key for session management
 
+main = Blueprint('main', __name__)
+# app = Flask(__name__)
+# app.config.from_object(Config)
+logging_config.configure_logging()
+# app.secret_key = 'your_secret_key'  
+
+
+# print(app.url_map)
 logging.info('I am in main.py file')
 print(Config.BASE_DIR)
 
@@ -30,7 +36,7 @@ eventcodes_path = os.path.join(Config.BASE_DIR, 'event_codes.json')
 try:
     shutil.rmtree(Config.UPLOADS_DIR)
 except:
-    logging.info('cannot remove')
+    logging.info('cannot remove upload directory')
 
 @main.route('/')
 def index():

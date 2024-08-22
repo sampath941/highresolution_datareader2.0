@@ -1,34 +1,43 @@
 ./
+    .dockerignore
     .env
     .gitignore
+    config.json
     config.py
+    docker-compose.yaml
+    dockerfile
+    dockerrun.ps1
     event_codes.json
     generate_structure.py
+    minimal.py
     project_structure.txt
     requirements.txt
     run.py
     .azure/
         config
     app/
-        asclog.db
         utils.py
         __init__.py
         main/
             main.py
             routes.py
+            simulation.py
             __init__.py
         services/
             db_convert.py
             db_handler.py
+            det_simulator.py
             file_operations.py
             logging_config.py
             __init__.py
         static/
             scripts.js
+            simconfig_ui.css
+            sim_script.js
             styles.css
         templates/
             confirm_download.html
             connect.html
             index.html
+            simconfig_ui.html
             upload.html
-    uploads/

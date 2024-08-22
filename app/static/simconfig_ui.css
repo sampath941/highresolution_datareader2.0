@@ -1,0 +1,180 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #d6984f;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    margin-bottom: 1rem;
+}
+
+#config-form {
+    margin-bottom: 2rem;
+}
+
+/* Flexbox for the devices container */
+#devices-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between; /* Ensure space is distributed evenly */
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: calc(50% - 0.5rem); /* Make input fields more compact */
+    padding: 0.4rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 0.8rem 1.2rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #d6984f;
+    color: white;
+    width: auto;
+    padding: 0.8rem 1.5rem;
+}
+
+.btn-primary:hover {
+    background-color: #bf7e33;
+}
+
+.btn-secondary {
+    background-color: #ffffff;
+    color: #d6984f;
+    border: 2px solid #d6984f;
+    width: auto;
+    padding: 0.8rem 1.5rem;
+}
+
+.btn-secondary:hover {
+    background-color: #d6984f;
+    color: white;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+#start-simulation-btn,
+#stop-simulation-btn {
+    flex: 1;
+    margin: 0 0.5rem;
+}
+
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.flashes li {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #f5c6cb;
+}
+
+/* Flexbox for devices in a row */
+#devices-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to the next row if there are too many devices */
+    gap: 1rem; /* Space between device blocks */
+    justify-content: flex-start; /* Align items to the start of the container */
+    align-items: flex-start; /* Aligns items to the start of the container */
+}
+
+.device-block {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 1rem;
+    flex: 1 1 20%; /* Flex-grow, flex-shrink, flex-basis; ensures blocks are 15% wide and grow/shrink accordingly */
+    max-width: calc(21% - 1rem); /* Ensure no block exceeds 20% of container width */
+    min-width: 15%; /* Maintain minimum width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.device-block h3 {
+    color: #d6984f;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.device-block input[type="text"], 
+.device-block input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+.device-block label {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    color: #333;
+}
+
+.device-block button {
+    align-self: flex-end;
+    margin-top: 0.5rem;
+    background-color: #d6984f;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.device-block button:hover {
+    background-color: #bf7e33; /* Slightly darker shade for hover effect */
+}
+
+.danger-button {
+    background-color: #bf4c4c; /* A red color to indicate danger or deletion */
+    color: white;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+.danger-button:hover {
+    background-color: #a33b3b; /* Darker red for hover */
+}

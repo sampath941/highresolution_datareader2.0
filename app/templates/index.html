@@ -3,51 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>High Resolution Data Reader</title>
+    <title>Signal Assist</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='scripts.js') }}" defer></script>
 </head>
 <body>
     <header>
-        <h1>High Resolution Data Reader</h1>
+        <h1>Signal Assist</h1>
     </header>
-    <nav>
-        <a href="{{ url_for('main.upload') }}" class="nav-link">Upload a .db File</a> 
-        <a href="{{ url_for('main.connect') }}" class="nav-link">Connect to a Controller</a>
-    </nav>
     <main>
-        <form action="{{ url_for('main.save') }}" method="post" enctype="multipart/form-data" id="save-form">
-            <label for="data_format">File Export Format:</label>
-            <div class="custom-radio">
-                <input type="radio" id="csv" name="data_format" value="csv" checked>
-                <span></span>
-                <label for="csv">CSV</label>
-            <div>
-            </div class="custom-radio">
-                <input type="radio" id="excel" name="data_format" value="excel">
-                <span></span>
-                <label for="excel">Excel</label>
+        <!-- Section for High Resolution Data Reader -->
+        <div class="section">
+            <h2>High Resolution Data Reader</h2>
+            <nav>
+                <a href="{{ url_for('main.upload') }}" class="nav-link">Upload a .db File</a> 
+                <a href="{{ url_for('main.connect') }}" class="nav-link">Connect to a Controller</a>
+            </nav>
+            <form action="{{ url_for('main.save') }}" method="post" enctype="multipart/form-data" id="save-form">
+                <label for="data_format">File Export Format:</label>
+                <div class="custom-radio">
+                    <input type="radio" id="csv" name="data_format" value="csv" checked>
+                    <span></span>
+                    <label for="csv">CSV</label>
+                </div>
+                <div class="custom-radio">
+                    <input type="radio" id="excel" name="data_format" value="excel">
+                    <span></span>
+                    <label for="excel">Excel</label>
+                </div>
+                <label for="filename">Choose Filename:</label>
+                <input type="text" name="filename" id="filename" required>
+                <button type="submit" class="{{ 'button-disabled' if not export_enabled else '' }}" {{ 'disabled' if not export_enabled else '' }}>Export to PC</button>
+                <button type="button" onclick="window.location.reload(true);">Refresh Page</button>
+            </form>
+
+            <div id="progress-container">
+                <div id="progress-bar">0%</div>
             </div>
-            <label for="filename">Choose Filename:</label>
-            <input type="text" name="filename" id="filename" required>
-            <button type="submit" class="{{ 'button-disabled' if not export_enabled else '' }}" {{ 'disabled' if not export_enabled else '' }}>Export to PC</button>
-            <button type="button" onclick="window.location.reload(true);">Refresh Page</button>
-        </form>
-        
-        <div id="progress-container">
-            <div id="progress-bar">0%</div>
+
+            <div id="messages-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    <ul class="flashes">
+                    {% for category, message in messages %}
+                      <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </div>
         </div>
 
-        <div id="messages-container">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                <ul class="flashes">
-                {% for category, message in messages %}
-                  <li class="{{ category }}">{{ message }}</li>
-                {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
+        <!-- Section for Simulate Detectors -->
+        <div class="section">
+            <h2>Simulate Detectors</h2>
+            <p>Configure and run simulations for your detectors.</p>
+            <div class="section-button">
+                <a href="{{ url_for('simulation.config_ui') }}">Go to Simulation Setup</a>
+            </div>
         </div>
     </main>
 </body>
