@@ -1,17 +1,17 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
 header {
     background-color: #d6984f;
     color: white;
-    padding: 0.5px;
+    padding: 1rem;
     text-align: center;
 }
-
 
 nav {
     display: flex;
@@ -24,40 +24,76 @@ nav {
     display: inline-block;
     padding: 10px 15px;
     margin: 5px;
-    background-color: #d6984f; /* Bootstrap primary blue */
+    background-color: #d6984f; /* Button color */
     color: white;
-    text-decoration: none; /* Removes underline */
-    border-radius: 5px; /* Rounded corners for a softer look */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
     margin-top: 20px;
     font-weight: bold;
 }
 
 .nav-link:hover, .nav-link:focus {
-    background-color: grey; /* Darker blue on hover */
-    transform: translateY(-2px); /* Slight raise effect on hover */
+    background-color: grey;
+    transform: translateY(-2px);
     color: #ffffff;
 }
 
 .nav-link:active {
-    transform: translateY(1px); /* Slight push effect when clicked */
-    background-color: white; /* Even darker blue for active state */
+    transform: translateY(1px);
+    background-color: white;
 }
 
-
 main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 2rem;
+}
+
+.section {
+    background: white;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 2rem;
+    width: 45%;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section h2 {
+    color: #d6984f;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.section p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.section-button {
+    margin-top: 2rem;
+}
+
+.section-button a {
+    background-color: #d6984f;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.section-button a:hover {
+    background-color: #bf7e33;
 }
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 1rem;
 }
 
 .form-group {
@@ -66,11 +102,9 @@ form {
 }
 
 label {
-    margin: 15px 0 15px;
+    margin: 15px 0;
     margin-top: 20 px;
 }
-
-
 
 select, input[type="text"], button {
     padding: 10px;
@@ -98,7 +132,6 @@ button:hover {
     margin-top: 20px;
     padding: 20px;
     border-radius: 5px;
-    font-family: Arial, sans-serif;
 }
 
 .flashes {
@@ -114,47 +147,46 @@ button:hover {
 }
 
 .info {
-    background-color: #2196F3; /* Blue */
+    background-color: #2196F3;
 }
 
 .success {
-    background-color: #4caf50; /* Green */
+    background-color: #4caf50;
     border: 1px solid #4caf50;
     font-size: 20px;
     color: white;
 }
 
 .warning {
-    background-color: #FFC107; /* Yellow */
+    background-color: #FFC107;
 }
 
 .error {
-    background-color: #F44336; /* Red */
+    background-color: #F44336;
 }
 
 .page-title {
-    font-size: 2em; /* Makes the font larger */
-    color: white; /* A pleasant dark blue */
-    font-family: 'Arial', sans-serif; /* Arial is widely supported and looks professional */
-    text-align: center; /* Centers the title */
-    margin-top: 20px; /* Adds space above the title */
-    margin-bottom: 20px; /* Adds space below the title */
-    padding: 10px; /* Adds padding inside the title area */
-    border-bottom: 2px solid #D3D3D3; /* A subtle line under the title */
-    background-color: #d6984f; /* A light grey background */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
-    width: 50%; /* Controls the width of the title block */
-    margin-left: auto; /* Together with the next line, centers the title block */
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 2px solid #D3D3D3;
+    background-color: #d6984f;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 50%;
+    margin-left: auto;
     margin-right: auto;
 }
 
 .button-container {
-    text-align: center; /* Centers the buttons */
+    text-align: center;
     margin-top: 20px;
 }
 
 .form-button {
-    background-color: #d6984f; /* Green background */
+    background-color: #d6984f;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -166,6 +198,7 @@ button:hover {
     cursor: pointer;
     border-radius: 5px;
 }
+
 input[type="text"], input[type="password"] {
     width: 25%;
     padding: 12px 20px;
@@ -187,7 +220,6 @@ form {
     margin-bottom: 20px;
 }
 
-
 .button-container {
     text-align: center;
     margin-top: 20px;
@@ -201,7 +233,7 @@ form {
 }
 
 .file-label {
-    margin-right: 10px; /* Adds space between the label and the input */
+    margin-right: 10px;
     font-weight: bold;
 }
 
@@ -216,7 +248,7 @@ input[type="file"] {
 
 form {
     margin: auto;
-    width: 80%; /* Adjust as needed for your design */
+    width: 80%;
     padding: 10px;
 }
 
@@ -234,7 +266,7 @@ form {
 
 .radio-group label {
     margin-right: 20px;
-    font-weight: normal; /* Adjust the font style as needed */
+    font-weight: normal;
     cursor: pointer;
 }
 
@@ -259,7 +291,6 @@ button:disabled, .button-disabled {
     cursor: not-allowed;
 }
 
-/* Custom radio button styles */
 .custom-radio {
     display: flex;
     align-items: center;
@@ -277,13 +308,11 @@ button:disabled, .button-disabled {
     position: relative;
 }
 
-/* Custom radio button when checked */
 input[type="radio"]:checked + span {
     background-color: #d6984f;
     box-shadow: 0 0 0 2px #d6984f;
 }
 
-/* Inner circle for checked radio button */
 input[type="radio"]:checked + span::before {
     content: '';
     width: 12px;
@@ -296,7 +325,6 @@ input[type="radio"]:checked + span::before {
     transform: translate(-50%, -50%);
 }
 
-/* Label styles */
 .custom-radio label {
     font-size: 16px;
     color: #333;
