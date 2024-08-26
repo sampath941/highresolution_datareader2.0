@@ -220,8 +220,8 @@ button {
 }
 
 .status-indicator {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     background-color: #dc3545; /* Default to Red (Inactive) */
     margin-right: 8px;
@@ -238,7 +238,7 @@ button {
 }
 
 .status-text {
-    font-size: 14px;
+    font-size: 18px;
     color: #333;
     font-weight: 500;
 }

@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     startButton.disabled = false;
                     stopButton.disabled = true;
                 }
-                
+
                 document.getElementById('total-requests').textContent = data.Total_Requests;
                 document.getElementById('successful-requests').textContent = data.Successful_Requests;
                 document.getElementById('failed-requests').textContent = data.Failed_Requests;                
@@ -101,4 +101,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('stop-simulation-btn').addEventListener('click', function() {
         fetch('/simulation/stop-simulation', { method: 'POST' });
     });
+    const messagesContainer = document.getElementById('messages-container');
+        
+    if (messagesContainer) {
+        // Set a timeout to remove the messages after 5 seconds (5000 milliseconds)
+        setTimeout(function() {
+            messagesContainer.style.transition = 'opacity 0.5s ease';
+            messagesContainer.style.opacity = '0'; // Fade out
+            setTimeout(function() {
+                messagesContainer.innerHTML = ''; // Remove the messages from the DOM
+            }, 500); // Wait for the fade-out to complete before removing
+        }, 5000); // 5-second delay before starting the fade-out
+    }
 });

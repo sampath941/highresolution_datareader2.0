@@ -4,6 +4,7 @@ import json
 from app.utils import generate_pattern, on_off_time
 import logging
 from app.services.simulation_state import set_simulation_status
+from flask import flash
 
 # Assuming bit group size is 8 (detectors 1-8, 9-16, etc.)
 BIT_GROUP_SIZE = 8
