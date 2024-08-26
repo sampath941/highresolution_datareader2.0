@@ -8,44 +8,39 @@
     <script src="{{ url_for('static', filename='sim_script.js') }}" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Detector Simulation</h1>
-    </header>
+    <h1 class="page-title">Detector Simulation</h1>
     <main>
-        {% if config %}
-            <h2>Current Configuration</h2>
-            <div id="configuration-display">
-                {% for device in config['devices'] %}
-                    <div class="device">
-                        <h3>Device: {{ device.hostname }}</h3>
-                        <ul>
-                            {% for detector in device.detectors %}
-                                <li>Detector {{ detector.detnumber }}: Volume {{ detector.volume }}, Occupancy {{ detector.occupancy }}, Frequency {{ detector.frequency }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        
         <form id="config-form" action="{{ url_for('simulation.save_config') }}" method="post">
-            <h2>Devices Configuration</h2>
-
             <div id="devices-container" class="devices-row">
                 <!-- Device configuration blocks will be added here dynamically -->
             </div>
-
             <button type="button" id="add-device-btn" class="btn-primary">Add Device</button>
             <button type="submit" class="btn-primary">Save Configuration</button>
         </form>
 
         <form action="{{ url_for('simulation.clear_config') }}" method="post">
-            <button type="submit" class="danger-button">Clear Configuration</button>
+            <button type="submit" class="danger-button">Clear And Start Fresh Configuration </button>
         </form>
 
         <div class="button-group">
             <button type="button" id="start-simulation-btn" class="btn-secondary">Start Simulation</button>
-            <button type="button" id="stop-simulation-btn" class="btn-secondary">Stop Simulation</button>
+            <button type="button" id="stop-simulation-btn" class="btn-secondary" disabled>Stop Simulation</button>
+        </div>
+
+        <div class="simulation-status-wrapper">
+            <div class="simulation-status-container">
+                <div class="status-indicator" id="status-indicator"></div>
+                <span class="status-text">Simulation Status</span>
+            </div>
+            <div id="request-stats">
+                <p>Total Requests: <span id="total-requests">0</span></p>
+                <p>Successful Requests: <span id="successful-requests">0</span></p>
+                <p>Failed Requests: <span id="failed-requests">0</span></p>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="{{ url_for('main.index') }}" class="btn-primary">Back to Home</a>
         </div>
 
         <div id="messages-container">
@@ -59,6 +54,22 @@
               {% endif %}
             {% endwith %}
         </div>
+
+        {% if config %}
+        <h2>Current Configuration</h2>
+        <div id="configuration-display">
+            {% for device in config['devices'] %}
+                <div class="device">
+                    <h3>Device: {{ device.hostname }}</h3>
+                    <ul>
+                        {% for detector in device.detectors %}
+                            <li>Detector {{ detector.detnumber }}: Volume {{ detector.volume }}, Occupancy {{ detector.occupancy }}, Frequency {{ detector.frequency }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </main>
 </body>
 </html>

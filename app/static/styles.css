@@ -57,8 +57,15 @@ main {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 2rem;
     width: 45%;
-    margin-bottom: 2rem;
+    margin: 0 auto;  /* Center the section block horizontally */
     text-align: center;
+    
+    /* Flexbox properties for centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* Vertical center */
+    align-items: center;  /* Horizontal center */
+    height: 700px; /* Set a specific height for the section block */
 }
 
 .section h2 {
@@ -175,7 +182,7 @@ button:hover {
     border-bottom: 2px solid #D3D3D3;
     background-color: #d6984f;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 50%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }

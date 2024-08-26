@@ -3,6 +3,7 @@ import aiohttp
 import json
 from app.utils import generate_pattern, on_off_time
 import logging
+from app.services.simulation_state import set_simulation_status
 
 # Assuming bit group size is 8 (detectors 1-8, 9-16, etc.)
 BIT_GROUP_SIZE = 8
@@ -13,6 +14,10 @@ bit_group_locks = {}
 
 # Event to signal when to stop the simulation
 stop_event = asyncio.Event()
+
+total_requests = 0
+successful_requests = 0
+failed_requests = 0
 
 def get_bit_group(detnumber):
     return (detnumber - 1) // BIT_GROUP_SIZE
@@ -36,8 +41,29 @@ def generate_masked_pattern(bit_group):
     return {base: bit_group_state[bit_group]}
 
 async def post_data(session, uri, data):
-    async with session.post(uri, json=data) as response:
-        return await response.text()
+    global total_requests, successful_requests, failed_requests
+    total_requests += 1 
+    try:
+        async with session.post(uri, json=data) as response:
+            if response.status == 200:
+                successful_requests+=1
+                set_simulation_status(True, total_requests, successful_requests, failed_requests)
+#                print('Total Requests in if condition', total_requests)
+                
+#                print('Simulation is Active')  # Set to True when status is 200
+            else:
+                failed_requests+=1
+                set_simulation_status(True, total_requests, successful_requests, failed_requests)
+#                print('Total Requests in else condition', total_requests)
+
+                
+#                print('Simulation is InActive') # Set to False for any other status
+            return await response.text()
+    except aiohttp.ClientError as e:
+        set_simulation_status(True, total_requests, successful_requests, failed_requests)
+        failed_requests += 1
+        print("Simulation is Inactive due to an error:", e)
+#        print('Total Requests in except condition', total_requests)
 
 async def run_detector(session, hostname, detector):
     detnumber = detector['detnumber']
@@ -72,16 +98,36 @@ async def run_detector(session, hostname, detector):
 
         await asyncio.sleep(percall_off_time)
 
+async def print_request_stats(interval=10):
+    while not stop_event.is_set():
+        await asyncio.sleep(interval)  # Wait for the specified interval
+        print(f"Total requests: {total_requests}")
+        print(f"Successful requests: {successful_requests}")
+        print(f"Failed requests: {failed_requests}")
+
 async def run_simulation(config):
-    stop_event.clear()  # Clear the stop event at the start of the simulation
-    async with aiohttp.ClientSession() as session:
-        tasks = []
-        for device in config['devices']:
-            hostname = device['hostname']
-            for detector in device['detectors']:
-                task = run_detector(session, hostname, detector)
-                tasks.append(task)
-        await asyncio.gather(*tasks)
+    global total_requests, successful_requests, failed_requests
+    total_requests = 0
+    successful_requests = 0
+    failed_requests = 0
+    try:
+        stop_event.clear()  # Clear the stop event at the start of the simulation
+        set_simulation_status(True, 0, 0, 0)
+        async with aiohttp.ClientSession() as session:
+            tasks = []
+            tasks.append(asyncio.create_task(print_request_stats()))
+            for device in config['devices']:
+                hostname = device['hostname']
+                for detector in device['detectors']:
+                    task = run_detector(session, hostname, detector)
+                    tasks.append(task)
+            await asyncio.gather(*tasks)
+            pass
+    finally:
+        set_simulation_status(False, total_requests, successful_requests, failed_requests)
+        print(f"Total requests: {total_requests}")
+        print(f"Successful requests: {successful_requests}")
+        print(f"Failed requests: {failed_requests}")
 
 def stop_simulation():
     stop_event.set()  # Set the stop event to signal all tasks to stop

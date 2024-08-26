@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('add-device-btn').addEventListener('click', function() {
         const deviceContainer = document.getElementById('devices-container');
-        const deviceCount = deviceContainer.children.length; // Starts at 0
+        const deviceCount = deviceContainer.children.length;
 
         const deviceBlock = document.createElement('div');
         deviceBlock.classList.add('device-block');
-        deviceBlock.setAttribute('data-device-id', deviceCount); // Set a data attribute for easy reference
+        deviceBlock.setAttribute('data-device-id', deviceCount);
 
         deviceBlock.innerHTML = `
             <h3>Device ${deviceCount + 1}</h3>
@@ -17,22 +17,23 @@ document.addEventListener('DOMContentLoaded', function () {
             <div id="detectors-container-${deviceCount}">
                 <!-- Detectors will be added here dynamically -->
             </div>
-            <button type="button" onclick="addDetector(${deviceCount})">Add Detector</button>
-            <button type="button" onclick="removeDetector(${deviceCount})" class="danger-button">Remove Detector</button>
-
-
-
-
-
+            <div class="detector-actions">
+                <button type="button" onclick="addDetector(${deviceCount})" class="btn-primary">Add a New Detector</button>
+                <button type="button" onclick="removeLastDetector(${deviceCount})" class="danger-button">Remove Detector</button>
+            </div>
+            <button type="button" class="danger-button remove-device-btn" onclick="removeDevice(${deviceCount})">Remove Device</button>
         `;
         deviceContainer.appendChild(deviceBlock);
     });
 
     window.addDetector = function(deviceId) {
         const detectorContainer = document.getElementById(`detectors-container-${deviceId}`);
-        const detectorCount = detectorContainer.children.length; // Starts at 0
+        const detectorCount = detectorContainer.children.length;
 
         const detectorBlock = document.createElement('div');
+        detectorBlock.classList.add('detector-block');
+        detectorBlock.setAttribute('data-detector-id', detectorCount);
+
         detectorBlock.innerHTML = `
             <h5>Detector ${detectorCount + 1}</h5>
             <label for="detnumber-${deviceId}-${detectorCount}">Detector Number:</label>
@@ -47,58 +48,56 @@ document.addEventListener('DOMContentLoaded', function () {
         detectorContainer.appendChild(detectorBlock);
     };
 
-    window.removeDetector = function(deviceId, detectorId) {
-        // Remove the detector block from the DOM
-        const detectorBlock = document.querySelector(`#detectors-container-${deviceId} [data-detector-id="${detectorId}"]`);
-        if (detectorBlock) {
-            detectorBlock.remove();
+    window.removeLastDetector = function(deviceId) {
+        const detectorContainer = document.getElementById(`detectors-container-${deviceId}`);
+        if (detectorContainer.children.length > 0) {
+            detectorContainer.removeChild(detectorContainer.lastElementChild);
         }
-
-        // Send a request to the server to remove the detector from the config
-        fetch('/simulation/remove-detector', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ deviceId: deviceId, detectorId: detectorId }),
-        }).then(response => {
-            if (response.ok) {
-                alert('Detector removed successfully.');
-            } else {
-                alert('Failed to remove the detector.');
-            }
-        });
     };
 
     window.removeDevice = function(deviceId) {
-        // Remove the device block from the DOM
-        const deviceBlock = document.querySelector(`[data-device-id="${deviceId}"]`);
+        const deviceBlock = document.querySelector(`.device-block[data-device-id="${deviceId}"]`);
         if (deviceBlock) {
             deviceBlock.remove();
         }
-
-        // Send a request to the server to remove the device from the config
-        fetch('/simulation/remove-device', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ deviceId: deviceId }),
-        }).then(response => {
-            if (response.ok) {
-                alert('Device removed successfully.');
-            } else {
-                alert('Failed to remove the device.');
-            }
-        });
     };
 
-    // Start simulation
+    function checkSimulationStatus() {
+        console.log("Checking simulation status...");
+        fetch('/simulation/simulation-status')
+            .then(response => response.json())
+            .then(data => {
+                const statusIndicator = document.getElementById('status-indicator');
+                const startButton = document.getElementById('start-simulation-btn');
+                const stopButton = document.getElementById('stop-simulation-btn');
+                if (data.status) {
+                    statusIndicator.classList.remove('inactive');
+                    statusIndicator.classList.add('active');
+                    startButton.disabled = true;
+                    stopButton.disabled = false;
+                } else {
+                    statusIndicator.classList.remove('active');
+                    statusIndicator.classList.add('inactive');
+                    startButton.disabled = false;
+                    stopButton.disabled = true;
+                }
+                
+                document.getElementById('total-requests').textContent = data.Total_Requests;
+                document.getElementById('successful-requests').textContent = data.Successful_Requests;
+                document.getElementById('failed-requests').textContent = data.Failed_Requests;                
+            })
+            .catch(error => {
+                console.error('Error fetching simulation status:', error);
+            });
+    };
+    
+    setInterval(checkSimulationStatus, 3000); 
+    checkSimulationStatus();
+
     document.getElementById('start-simulation-btn').addEventListener('click', function() {
         fetch('/simulation/start-simulation', { method: 'POST' });
     });
 
-    // Stop simulation
     document.getElementById('stop-simulation-btn').addEventListener('click', function() {
         fetch('/simulation/stop-simulation', { method: 'POST' });
     });
