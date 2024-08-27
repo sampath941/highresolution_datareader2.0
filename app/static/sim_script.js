@@ -38,14 +38,44 @@ document.addEventListener('DOMContentLoaded', function () {
             <h5>Detector ${detectorCount + 1}</h5>
             <label for="detnumber-${deviceId}-${detectorCount}">Detector Number:</label>
             <input type="number" name="devices[${deviceId}][detectors][${detectorCount}][detnumber]" id="detnumber-${deviceId}-${detectorCount}" required>
-            <label for="volume-${deviceId}-${detectorCount}">Volume:</label>
-            <input type="number" name="devices[${deviceId}][detectors][${detectorCount}][volume]" id="volume-${deviceId}-${detectorCount}" required>
-            <label for="occupancy-${deviceId}-${detectorCount}">Occupancy:</label>
-            <input type="number" name="devices[${deviceId}][detectors][${detectorCount}][occupancy]" id="occupancy-${deviceId}-${detectorCount}" required>
-            <label for="frequency-${deviceId}-${detectorCount}">Frequency:</label>
-            <input type="number" name="devices[${deviceId}][detectors][${detectorCount}][frequency]" id="frequency-${deviceId}-${detectorCount}" required>
+            <div id="sequences-container-${deviceId}-${detectorCount}" class="sequences-container">
+                <!-- Sequences will be added here dynamically -->
+            </div>
+            <div class="sequence-actions">
+                <button type="button" onclick="addSequence(${deviceId}, ${detectorCount})" class="btn-primary">Add a Sequence</button>
+                <button type="button" onclick="removeLastSequence(${deviceId}, ${detectorCount})" class="danger-button">Remove Last Sequence</button>
+            </div>
         `;
         detectorContainer.appendChild(detectorBlock);
+    };
+
+    window.addSequence = function(deviceId, detectorId) {
+        const sequenceContainer = document.getElementById(`sequences-container-${deviceId}-${detectorId}`);
+        const sequenceCount = sequenceContainer.children.length;
+
+        const sequenceBlock = document.createElement('div');
+        sequenceBlock.classList.add('sequence-block');
+        sequenceBlock.setAttribute('data-sequence-id', sequenceCount);
+
+        sequenceBlock.innerHTML = `
+            <h6>Sequence ${sequenceCount + 1}</h6>
+            <label for="volume-${deviceId}-${detectorId}-${sequenceCount}">Volume:</label>
+            <input type="number" name="devices[${deviceId}][detectors][${detectorId}][sequences][${sequenceCount}][volume]" id="volume-${deviceId}-${detectorId}-${sequenceCount}" required>
+            <label for="occupancy-${deviceId}-${detectorId}-${sequenceCount}">Occupancy:</label>
+            <input type="number" name="devices[${deviceId}][detectors][${detectorId}][sequences][${sequenceCount}][occupancy]" id="occupancy-${deviceId}-${detectorId}-${sequenceCount}" required>
+            <label for="frequency-${deviceId}-${detectorId}-${sequenceCount}">Frequency:</label>
+            <input type="number" name="devices[${deviceId}][detectors][${detectorId}][sequences][${sequenceCount}][frequency]" id="frequency-${deviceId}-${detectorId}-${sequenceCount}" required>
+            <label for="duration-${deviceId}-${detectorId}-${sequenceCount}">Duration (seconds):</label>
+            <input type="number" name="devices[${deviceId}][detectors][${detectorId}][sequences][${sequenceCount}][duration]" id="duration-${deviceId}-${detectorId}-${sequenceCount}" required>
+        `;
+        sequenceContainer.appendChild(sequenceBlock);
+    };
+
+    window.removeLastSequence = function(deviceId, detectorId) {
+        const sequenceContainer = document.getElementById(`sequences-container-${deviceId}-${detectorId}`);
+        if (sequenceContainer.children.length > 0) {
+            sequenceContainer.removeChild(sequenceContainer.lastElementChild);
+        }
     };
 
     window.removeLastDetector = function(deviceId) {
@@ -101,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('stop-simulation-btn').addEventListener('click', function() {
         fetch('/simulation/stop-simulation', { method: 'POST' });
     });
+
     const messagesContainer = document.getElementById('messages-container');
         
     if (messagesContainer) {

@@ -36,7 +36,6 @@ def save_config():
     except (FileNotFoundError, json.JSONDecodeError):
         existing_config = {'devices': []}
 
-    # Clear the devices list to avoid duplicates
     devices = []
 
     # Extract all device IDs from the submitted form data
@@ -53,11 +52,23 @@ def save_config():
             detector_count = len([key for key in config_data.keys() if key.startswith(f'devices[{device_id}][detectors]') and key.endswith('[detnumber]')])
 
             for det_id in range(detector_count):
+                sequences = []
+                
+                # Count how many sequences are there for this detector
+                sequence_count = len([key for key in config_data.keys() if key.startswith(f'devices[{device_id}][detectors][{det_id}][sequences]') and key.endswith('[volume]')])
+
+                for seq_id in range(sequence_count):
+                    sequence = {
+                        'volume': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][volume]', [0])[0]),
+                        'occupancy': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][occupancy]', [0])[0]),
+                        'frequency': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][frequency]', [0])[0]),
+                        'duration': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][duration]', [0])[0]),
+                    }
+                    sequences.append(sequence)
+
                 detector = {
                     'detnumber': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][detnumber]', [0])[0]),
-                    'volume': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][volume]', [0])[0]),
-                    'occupancy': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][occupancy]', [0])[0]),
-                    'frequency': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][frequency]', [0])[0]),
+                    'sequences': sequences,
                 }
                 detectors.append(detector)
 
