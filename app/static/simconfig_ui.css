@@ -30,6 +30,16 @@ h1, h2 {
     margin-bottom: 2rem;
 }
 
+#configuration-display ul {
+    list-style-type: none; /* Removes the default bullet points */
+    padding-left: 0; /* Removes any default padding */
+}
+
+#configuration-display li {
+    margin-bottom: 5px; /* Adds some space between the list items */
+}
+
+
 /* Flexbox for the devices container */
 #devices-container {
     display: flex;

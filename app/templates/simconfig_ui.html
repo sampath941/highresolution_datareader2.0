@@ -19,7 +19,7 @@
         </form>
 
         <form action="{{ url_for('simulation.clear_config') }}" method="post">
-            <button type="submit" class="danger-button">Clear And Start Fresh Configuration </button>
+            <button type="submit" class="danger-button">Clear And Start Fresh Configuration</button>
         </form>
 
         <div class="button-group">
@@ -63,7 +63,19 @@
                     <h3>Device: {{ device.hostname }}</h3>
                     <ul>
                         {% for detector in device.detectors %}
-                            <li>Detector {{ detector.detnumber }}: Volume {{ detector.volume }}, Occupancy {{ detector.occupancy }}, Frequency {{ detector.frequency }}</li>
+                            <li>
+                                Detector {{ detector.detnumber }}:
+                                <ul>
+                                    {% for sequence in detector.sequences %}
+                                        <li>Sequence {{ loop.index }}:
+                                            Volume {{ sequence.volume }},
+                                            Occupancy {{ sequence.occupancy }},
+                                            Frequency {{ sequence.frequency }},
+                                            Duration {{ sequence.duration }} seconds
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>

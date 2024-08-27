@@ -68,36 +68,52 @@ async def post_data(session, uri, data):
 
 async def run_detector(session, hostname, detector):
     detnumber = detector['detnumber']
-    volume = detector['volume']
-    occupancy = detector['occupancy']
-    frequency = detector['frequency']
-
+    sequences = detector['sequences']  # List of sequences
     bit_group = get_bit_group(detnumber)
-    print('The bit group for the current detector is', bit_group)
-    percall_on_time, percall_off_time = on_off_time(volume, occupancy, frequency)
-    print('This is for detector Number', detnumber)
-    print('Here is the per_call_ontime', percall_on_time)
-    print('Here is the per_call_offtime', percall_off_time)
 
-    # Construct the URI for this detector
+    print(f'The bit group for the current detector {detnumber} is {bit_group}')
+
     uri = f"http://{hostname}/maxtime/api/mibs"
 
     while not stop_event.is_set():  # Continue until the stop event is set
-        # Turn the detector on
-        await update_bit_group_state(bit_group, detnumber, True)
-        pattern_on = generate_masked_pattern(bit_group)
-        post_on = {'data': [{'name': f'inputPointGroupControl-1', 'data': pattern_on}], 'noChangeLog': True, 'username': 'Admin'}
-        await post_data(session, uri, post_on)
+        for sequence in sequences:
+            volume = sequence['volume']
+            occupancy = sequence['occupancy']
+            frequency = sequence['frequency']
+            duration = sequence['duration']  # Duration in seconds
 
-        await asyncio.sleep(percall_on_time)
+            percall_on_time, percall_off_time = on_off_time(volume, occupancy, frequency)
+            print(f'Running sequence with volume: {volume}, occupancy: {occupancy}, frequency: {frequency}, duration: {duration}')
 
-        # Turn the detector off
-        await update_bit_group_state(bit_group, detnumber, False)
-        pattern_off = generate_masked_pattern(bit_group)
-        post_off = {'data': [{'name': f'inputPointGroupControl-1', 'data': pattern_off}], 'noChangeLog': True, 'username': 'Admin'}
-        await post_data(session, uri, post_off)
+            # Run the sequence for the specified duration
+            end_time = asyncio.get_event_loop().time() + duration
+            while asyncio.get_event_loop().time() < end_time:
+                if stop_event.is_set():
+                    break
 
-        await asyncio.sleep(percall_off_time)
+                # Turn the detector on
+                await update_bit_group_state(bit_group, detnumber, True)
+                pattern_on = generate_masked_pattern(bit_group)
+                post_on = {'data': [{'name': f'inputPointGroupControl-1', 'data': pattern_on}], 'noChangeLog': True, 'username': 'Admin'}
+                await post_data(session, uri, post_on)
+
+                await asyncio.sleep(percall_on_time)
+
+                # Turn the detector off
+                await update_bit_group_state(bit_group, detnumber, False)
+                pattern_off = generate_masked_pattern(bit_group)
+                post_off = {'data': [{'name': f'inputPointGroupControl-1', 'data': pattern_off}], 'noChangeLog': True, 'username': 'Admin'}
+                await post_data(session, uri, post_off)
+
+                await asyncio.sleep(percall_off_time)
+
+            if stop_event.is_set():
+                break
+
+        # Loop back to the first sequence after all sequences are completed
+        if not stop_event.is_set():
+            print(f'Completed all sequences for detector {detnumber}. Looping back to the first sequence.')
+
 
 async def print_request_stats(interval=10):
     while not stop_event.is_set():
