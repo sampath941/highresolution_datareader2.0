@@ -41,6 +41,7 @@ def fetch_data_from_db(filename):
 def connect_controller(ip_address, username, password, file_source):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    os.makedirs(Config.TEMPORARY_FILES_DIR, exist_ok=True)
     tempfilepath = os.path.join(Config.TEMPORARY_FILES_DIR, 'filefromcontroller')
     source_paths = {
         'active': '/tmp/asclog.db',
