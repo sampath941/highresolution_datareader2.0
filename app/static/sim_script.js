@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 <!-- Sequences will be added here dynamically -->
             </div>
             <div class="sequence-actions">
-                <button type="button" onclick="addSequence(${deviceId}, ${detectorCount})" class="btn-primary">Add a Sequence</button>
-                <button type="button" onclick="removeLastSequence(${deviceId}, ${detectorCount})" class="danger-button">Remove Last Sequence</button>
+                <button type="button" onclick="addSequence(${deviceId}, ${detectorCount})" class="btn-primary">Add a Cycle</button>
+                <button type="button" onclick="removeLastSequence(${deviceId}, ${detectorCount})" class="danger-button">Remove Cycle</button>
             </div>
         `;
         detectorContainer.appendChild(detectorBlock);
