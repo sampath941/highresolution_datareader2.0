@@ -23,52 +23,54 @@ failed_requests = 0
 def get_bit_group(detnumber):
     return (detnumber - 1) // BIT_GROUP_SIZE
 
-async def update_bit_group_state(bit_group, detnumber, state):
-    if bit_group not in bit_group_state:
-        bit_group_state[bit_group] = 0
-        bit_group_locks[bit_group] = asyncio.Lock()
-        print('if bit_group not in bit_group_state')
+async def update_bit_group_state(hostname, bit_group, detnumber, state):
+    key = (hostname, bit_group)
+
+    if key not in bit_group_state:
+        bit_group_state[key] = 0
+        bit_group_locks[key] = asyncio.Lock()
+        print('if key not in bit_group_state')
     
-    async with bit_group_locks[bit_group]:
+    async with bit_group_locks[key]:
         if state:
             # Turn on the bit corresponding to detnumber
-            bit_group_state[bit_group] |= (1 << ((detnumber - 1) % BIT_GROUP_SIZE))
+            bit_group_state[key] |= (1 << ((detnumber - 1) % BIT_GROUP_SIZE))
         else:
             # Turn off the bit corresponding to detnumber
-            bit_group_state[bit_group] &= ~(1 << ((detnumber - 1) % BIT_GROUP_SIZE))
+            bit_group_state[key] &= ~(1 << ((detnumber - 1) % BIT_GROUP_SIZE))
 
-def generate_masked_pattern(bit_group):
+def generate_masked_pattern(hostname, bit_group):
+    key = (hostname, bit_group)
     base = bit_group + 1  # Bit group base (1-indexed for this example)
-    return {base: bit_group_state[bit_group]}
+    return {base: bit_group_state[key]}
 
 async def post_data(session, uri, data):
     global total_requests, successful_requests, failed_requests
     total_requests += 1 
+
+    # print(f"Making POST request #{total_requests} to URI: {uri}")
+    # print(f"Post Data: {data}")
+
     try:
         async with session.post(uri, json=data) as response:
             if response.status == 200:
-                successful_requests+=1
+                successful_requests += 1
                 set_simulation_status(True, total_requests, successful_requests, failed_requests)
-#                print('Total Requests in if condition', total_requests)
-                
-#                print('Simulation is Active')  # Set to True when status is 200
             else:
-                failed_requests+=1
+                failed_requests += 1
                 set_simulation_status(True, total_requests, successful_requests, failed_requests)
-#                print('Total Requests in else condition', total_requests)
-
-                
-#                print('Simulation is InActive') # Set to False for any other status
             return await response.text()
     except aiohttp.ClientError as e:
         set_simulation_status(True, total_requests, successful_requests, failed_requests)
         failed_requests += 1
         print("Simulation is Inactive due to an error:", e)
-#        print('Total Requests in except condition', total_requests)
 
 async def run_detector(session, hostname, detector):
     detnumber = detector['detnumber']
-    sequences = detector['sequences']  # List of sequences
+    sequences = detector['sequences']  
+    print(f'Running detector {detnumber} for device {hostname}')
+    url = f"http://{hostname}/some_endpoint/{detnumber}"
+    print(f"Posting to {url} for detector {detnumber}")
     bit_group = get_bit_group(detnumber)
 
     print(f'The bit group for the current detector {detnumber} is {bit_group}')
@@ -80,7 +82,8 @@ async def run_detector(session, hostname, detector):
             volume = sequence['volume']
             occupancy = sequence['occupancy']
             frequency = sequence['frequency']
-            duration = sequence['duration']  # Duration in seconds
+            cycles = sequence['cycles']
+            duration = frequency * cycles
 
             percall_on_time, percall_off_time = on_off_time(volume, occupancy, frequency)
             print(f'Running sequence with volume: {volume}, occupancy: {occupancy}, frequency: {frequency}, duration: {duration}')
@@ -92,16 +95,16 @@ async def run_detector(session, hostname, detector):
                     break
 
                 # Turn the detector on
-                await update_bit_group_state(bit_group, detnumber, True)
-                pattern_on = generate_masked_pattern(bit_group)
+                await update_bit_group_state(hostname, bit_group, detnumber, True)
+                pattern_on = generate_masked_pattern(hostname, bit_group)
                 post_on = {'data': [{'name': f'inputPointGroupControl-1', 'data': pattern_on}], 'noChangeLog': True, 'username': 'Admin'}
                 await post_data(session, uri, post_on)
 
                 await asyncio.sleep(percall_on_time)
 
                 # Turn the detector off
-                await update_bit_group_state(bit_group, detnumber, False)
-                pattern_off = generate_masked_pattern(bit_group)
+                await update_bit_group_state(hostname, bit_group, detnumber, False)
+                pattern_off = generate_masked_pattern(hostname, bit_group)
                 post_off = {'data': [{'name': f'inputPointGroupControl-1', 'data': pattern_off}], 'noChangeLog': True, 'username': 'Admin'}
                 await post_data(session, uri, post_off)
 
@@ -115,12 +118,11 @@ async def run_detector(session, hostname, detector):
             print(f'Completed all sequences for detector {detnumber}. Looping back to the first sequence.')
 
 
+
+
 async def print_request_stats(interval=10):
     while not stop_event.is_set():
         await asyncio.sleep(interval)  # Wait for the specified interval
-        print(f"Total requests: {total_requests}")
-        print(f"Successful requests: {successful_requests}")
-        print(f"Failed requests: {failed_requests}")
 
 async def run_simulation(config):
     global total_requests, successful_requests, failed_requests
@@ -136,6 +138,7 @@ async def run_simulation(config):
             for device in config['devices']:
                 hostname = device['hostname']
                 for detector in device['detectors']:
+                    print(f'Processing hostname: {hostname}, detector number: {detector["detnumber"]}')
                     task = run_detector(session, hostname, detector)
                     tasks.append(task)
             await asyncio.gather(*tasks)
@@ -148,4 +151,3 @@ async def run_simulation(config):
 
 def stop_simulation():
     stop_event.set()  # Set the stop event to signal all tasks to stop
-

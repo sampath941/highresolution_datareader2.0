@@ -1,22 +1,33 @@
 {
     "devices": [
         {
-            "hostname": "kinetic-release-testing.q-free-asa.net/maxtime-1",
+            "hostname": "kinetic-release-testing.q-free-asa.net/maxtime-14",
             "detectors": [
                 {
                     "detnumber": 1,
                     "sequences": [
                         {
                             "volume": 20,
-                            "occupancy": 30,
-                            "frequency": 60,
-                            "duration": 120
-                        },
-                        {
-                            "volume": 40,
                             "occupancy": 50,
                             "frequency": 60,
-                            "duration": 120
+                            "cycles": 3
+                        },
+                        {
+                            "volume": 10,
+                            "occupancy": 75,
+                            "frequency": 60,
+                            "cycles": 3
+                        }
+                    ]
+                },
+                {
+                    "detnumber": 2,
+                    "sequences": [
+                        {
+                            "volume": 30,
+                            "occupancy": 40,
+                            "frequency": 120,
+                            "cycles": 3
                         }
                     ]
                 }
