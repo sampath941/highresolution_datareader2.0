@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 <!-- Sequences will be added here dynamically -->
             </div>
             <div class="sequence-actions">
-                <button type="button" onclick="addSequence(${deviceId}, ${detectorCount})" class="btn-primary">Add a Sequence</button>
-                <button type="button" onclick="removeLastSequence(${deviceId}, ${detectorCount})" class="danger-button">Remove Last Sequence</button>
+                <button type="button" onclick="addSequence(${deviceId}, ${detectorCount})" class="btn-primary">Add a Cycle</button>
+                <button type="button" onclick="removeLastSequence(${deviceId}, ${detectorCount})" class="danger-button">Remove Cycle</button>
             </div>
         `;
         detectorContainer.appendChild(detectorBlock);
@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <input type="number" name="devices[${deviceId}][detectors][${detectorId}][sequences][${sequenceCount}][occupancy]" id="occupancy-${deviceId}-${detectorId}-${sequenceCount}" required>
             <label for="frequency-${deviceId}-${detectorId}-${sequenceCount}">Frequency:</label>
             <input type="number" name="devices[${deviceId}][detectors][${detectorId}][sequences][${sequenceCount}][frequency]" id="frequency-${deviceId}-${detectorId}-${sequenceCount}" required>
-            <label for="duration-${deviceId}-${detectorId}-${sequenceCount}">Duration (seconds):</label>
-            <input type="number" name="devices[${deviceId}][detectors][${detectorId}][sequences][${sequenceCount}][duration]" id="duration-${deviceId}-${detectorId}-${sequenceCount}" required>
+            <label for="cycles-${deviceId}-${detectorId}-${sequenceCount}">No. of Cycles:</label>
+            <input type="number" name="devices[${deviceId}][detectors][${detectorId}][sequences][${sequenceCount}][cycles]" id="cycles-${deviceId}-${detectorId}-${sequenceCount}" required>
         `;
         sequenceContainer.appendChild(sequenceBlock);
     };

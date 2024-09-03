@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify, Flask
+import logging
 import os
 import json
 import asyncio
@@ -62,7 +63,7 @@ def save_config():
                         'volume': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][volume]', [0])[0]),
                         'occupancy': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][occupancy]', [0])[0]),
                         'frequency': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][frequency]', [0])[0]),
-                        'duration': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][duration]', [0])[0]),
+                        'cycles': int(config_data.get(f'devices[{device_id}][detectors][{det_id}][sequences][{seq_id}][cycles]', [0])[0]),
                     }
                     sequences.append(sequence)
 
@@ -168,5 +169,4 @@ def simulation_status_endpoint():
         success_percent = round ((succesful / total) * 100)
     else:
         success_percent = 0  # or you could use None, or some other appropriate value
-    print ('Here is the list of results:', status, total, succesful, failed, success_percent)
     return jsonify({'status': status, 'Total_Requests': total, 'Successful_Requests': succesful, 'Failed_Requests': failed, 'success_percent': success_percent})
