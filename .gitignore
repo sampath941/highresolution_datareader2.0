@@ -6,3 +6,4 @@ instance/
 .env
 /temporary_files
 /uploads
+config.json
