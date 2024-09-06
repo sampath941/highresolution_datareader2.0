@@ -1,0 +1,24 @@
+# SignalAssist 1.1
+
+This tool does two things as of today
+
+* Convert raw highresolution data into readable format
+    + All files converted can be exported into csv or excel which includes description of events
+    + User can upload a raw sqlite .db file on their system and convert into
+    + User can also connect to controller (if Ip can be reached) and grab following file for convertion
+        - Active highresolution file in the controller
+        - High resolution files from external devices
+
+* Simulate detector inputs based on the specified volume and occupancy requirements
+    + Eventhough UI says 'Detectors', we simulate Input points from inputppoint table 1
+    + We can simulate different detectors from different devices with varying frequencies, volume and occupancy at the same time
+
+
+How to create a docker image, make a docker tar ball and load a docker tar ball
+
+* Should have a DockerFile on repository
+* Run docker built -t <image_name> .
+* It creates an image on your docker 
+* docker save -o <image-name.tar> <image-name>:tag
+* We can load the docker tarbar image using docker load -i <image-name>.tar
+

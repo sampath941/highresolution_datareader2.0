@@ -1,5 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    // Check if the configuration is empty on page load
+    const isConfigEmpty = document.querySelectorAll('.device-block').length === 0;
+
+    const addDeviceBtn = document.getElementById('add-device-btn');
+    const saveConfigBtn = document.querySelector('form#config-form button[type="submit"]');
+
+    if (!isConfigEmpty) {
+        addDeviceBtn.disabled = true;
+        saveConfigBtn.disabled = true;
+    }
+
+    // Add Device Button Click Event
     document.getElementById('add-device-btn').addEventListener('click', function() {
         const deviceContainer = document.getElementById('devices-container');
         const deviceCount = deviceContainer.children.length;
@@ -24,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
             <button type="button" class="danger-button remove-device-btn" onclick="removeDevice(${deviceCount})">Remove Device</button>
         `;
         deviceContainer.appendChild(deviceBlock);
+
+        // Enable Save Configuration button since we now have at least one device
+        saveConfigBtn.disabled = false;
     });
 
     window.addDetector = function(deviceId) {
@@ -89,6 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const deviceBlock = document.querySelector(`.device-block[data-device-id="${deviceId}"]`);
         if (deviceBlock) {
             deviceBlock.remove();
+        }
+
+        // Check if there are any devices left after removing one
+        const deviceContainer = document.getElementById('devices-container');
+        if (deviceContainer.children.length === 0) {
+            saveConfigBtn.disabled = true;
         }
     };
 

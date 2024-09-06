@@ -14,16 +14,20 @@ CONFIG_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'config.json')
 @simulation.route('/config-ui')
 def config_ui():
     config = {}
+    is_empty = True
     try:
         # Load the existing configuration
         with open(CONFIG_PATH, 'r') as config_file:
             config = json.load(config_file)
+            if config.get('devices'):  # Check if the devices list is not empty
+                is_empty = False
     except (FileNotFoundError, json.JSONDecodeError):
         # If the file does not exist or is invalid, start with an empty config
         config = {'devices': []}
     
-    # Pass the configuration to the template
-    return render_template('simconfig_ui.html', config=config)
+    # Pass the configuration and is_empty flag to the template
+    return render_template('simconfig_ui.html', config=config, is_empty=is_empty)
+
 
 
 @simulation.route('/save-config', methods=['POST'])

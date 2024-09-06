@@ -14,8 +14,8 @@
             <div id="devices-container" class="devices-row">
                 <!-- Device configuration blocks will be added here dynamically -->
             </div>
-            <button type="button" id="add-device-btn" class="btn-primary">Add Device</button>
-            <button type="submit" class="btn-primary">Save Configuration</button>
+            <button type="button" id="add-device-btn" class="btn-primary" {% if not is_empty %}disabled{% endif %}>Add Device</button>
+            <button type="submit" class="btn-primary" {% if not is_empty %}disabled{% endif %}>Save Configuration</button>
         </form>
 
         <form action="{{ url_for('simulation.clear_config') }}" method="post">
@@ -55,7 +55,7 @@
             {% endwith %}
         </div>
 
-        {% if config %}
+        {% if config and config.devices %}
         <h2>Current Configuration</h2>
         <div id="configuration-display">
             {% for device in config['devices'] %}
@@ -81,6 +81,8 @@
                 </div>
             {% endfor %}
         </div>
+        {% else %}
+        <p>No configuration found. Please add a device.</p>
         {% endif %}
     </main>
 </body>
