@@ -228,29 +228,44 @@ button {
 
 .simulation-status-container {
     display: flex;
-    align-items: center; /* Vertically centers the items */
-    background-color: #f9f9f9;
-    padding: 8px 12px;
-    border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-direction: column; /* Align circles vertically */
+    justify-content: center; /* Center the circles within the container */
+    align-items: center;
+    gap: 10px; /* Space between the circles */
+    padding: 15px; /* Space inside the container */
+    border: 5px solid black; /* Thick black border around the container */
+    border-radius: 10px; /* Optional: slightly rounded corners for the container */
+    background-color: #333; /* Dark background to mimic traffic light housing */
 }
 
+/* General styling for the status indicators */
 .status-indicator {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #dc3545; /* Default to Red (Inactive) */
-    margin-right: 8px;
+    width: 20px; /* Increased width for better visibility */
+    height: 20px; /* Increased height to maintain the circle */
+    border-radius: 50%; /* Ensures the element is circular */
+    background-color: #ccc; /* Default to gray (Inactive) */
     transition: background-color 0.3s ease;
-    border: 1px solid #ccc;
+    border: 5px solid black; /* Thick black border for traffic signal effect */
 }
 
-.status-indicator.active {
+/* Specific colors for each status indicator */
+#green-indicator.active {
     background-color: #28a745; /* Green for Active */
 }
 
-.status-indicator.inactive {
+#yellow-indicator.active {
+    background-color: #ffc107; /* Yellow for Warning/Transition */
+}
+
+#red-indicator.active {
     background-color: #dc3545; /* Red for Inactive */
+}
+
+/* Inactive state for indicators */
+#green-indicator.inactive,
+#yellow-indicator.inactive,
+#red-indicator.inactive {
+    background-color: #ccc; /* Gray for Inactive */
 }
 
 .status-text {

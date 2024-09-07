@@ -112,27 +112,33 @@ document.addEventListener('DOMContentLoaded', function () {
             saveConfigBtn.disabled = true;
         }
     };
-
+    let inTransition = false;
     function checkSimulationStatus() {
-        console.log("Checking simulation status...");
+        if (inTransition) return; // Skip status check if we are in a transition
         fetch('/simulation/simulation-status')
             .then(response => response.json())
             .then(data => {
-                const statusIndicator = document.getElementById('status-indicator');
+                const greenIndicator = document.getElementById('green-indicator');
+                const yellowIndicator = document.getElementById('yellow-indicator');
+                const redIndicator = document.getElementById('red-indicator');
                 const startButton = document.getElementById('start-simulation-btn');
                 const stopButton = document.getElementById('stop-simulation-btn');
-                if (data.status) {
-                    statusIndicator.classList.remove('inactive');
-                    statusIndicator.classList.add('active');
+    
+                if (data.status === true) { // Simulation is active (Green)
+                    greenIndicator.classList.add('active');
+                    yellowIndicator.classList.remove('active');
+                    redIndicator.classList.remove('active');
                     startButton.disabled = true;
                     stopButton.disabled = false;
-                } else {
-                    statusIndicator.classList.remove('active');
-                    statusIndicator.classList.add('inactive');
+                } else { // Simulation is inactive (Red)
+                    greenIndicator.classList.remove('active');
+                    yellowIndicator.classList.remove('active');
+                    redIndicator.classList.add('active');
                     startButton.disabled = false;
                     stopButton.disabled = true;
+                    inTransition = false; // Transition is complete
                 }
-
+    
                 document.getElementById('total-requests').textContent = data.Total_Requests;
                 document.getElementById('successful-requests').textContent = data.Successful_Requests;
                 document.getElementById('failed-requests').textContent = data.Failed_Requests;                
@@ -140,17 +146,40 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Error fetching simulation status:', error);
             });
-    };
+    }
     
-    setInterval(checkSimulationStatus, 3000); 
+    setInterval(checkSimulationStatus, 5000); 
     checkSimulationStatus();
 
+
     document.getElementById('start-simulation-btn').addEventListener('click', function() {
-        fetch('/simulation/start-simulation', { method: 'POST' });
+        inTransition = false;
+        fetch('/simulation/start-simulation', { method: 'POST' })
+            .then(() => {
+                checkSimulationStatus(); // Check status immediately after starting
+            });
     });
 
     document.getElementById('stop-simulation-btn').addEventListener('click', function() {
-        fetch('/simulation/stop-simulation', { method: 'POST' });
+        inTransition = true; // Set the transition flag when stopping
+        const greenIndicator = document.getElementById('green-indicator');
+        const yellowIndicator = document.getElementById('yellow-indicator');
+        const redIndicator = document.getElementById('red-indicator');
+    
+        // Set the indicators: Yellow active, Green inactive
+        greenIndicator.classList.remove('active');
+        yellowIndicator.classList.add('active');
+        redIndicator.classList.remove('active');
+    
+        // Send the stop request to the server
+        fetch('/simulation/stop-simulation', { method: 'POST' })
+            .then(() => {
+                // After sending the stop request, check the status after a short delay
+                setTimeout(() => {
+                    inTransition = false; // End the transition before checking the status
+                    checkSimulationStatus(); // Check the status again to transition to red
+                }, 7000); // Reduced delay to quickly re-check the status
+            });
     });
 
     const messagesContainer = document.getElementById('messages-container');

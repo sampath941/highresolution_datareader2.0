@@ -106,9 +106,10 @@ def start_simulation():
 
 @simulation.route('/stop-simulation', methods=['POST'])
 def stop_simulation():
-    stop_event.set() 
+    
     status, total, succesful, failed = get_simulation_status()
     set_simulation_status(False, total, succesful, failed) # Signal the simulation to stop
+    stop_event.set() 
     return '', 204
 
 @simulation.route('/clear-config', methods=['POST'])

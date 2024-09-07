@@ -29,8 +29,9 @@
 
         <div class="simulation-status-wrapper">
             <div class="simulation-status-container">
-                <div class="status-indicator" id="status-indicator"></div>
-                <span class="status-text">Simulation Status</span>
+                <div class="status-indicator" id="green-indicator"></div>
+                <div class="status-indicator" id="yellow-indicator"></div>
+                <div class="status-indicator" id="red-indicator"></div>
             </div>
             <div id="request-stats">
                 <p>Total Requests: <span id="total-requests">0</span></p>
@@ -38,7 +39,6 @@
                 <p>Failed Requests: <span id="failed-requests">0</span></p>
             </div>
         </div>
-
         <div class="button-group">
             <a href="{{ url_for('main.index') }}" class="btn-primary">Back to Home</a>
         </div>
