@@ -11,6 +11,7 @@
     generate_structure.py
     minimal.py
     project_structure.txt
+    README.me
     requirements.txt
     run.py
     .azure/
@@ -29,8 +30,10 @@
             det_simulator.py
             file_operations.py
             logging_config.py
+            simulation_state.py
             __init__.py
         static/
+            fetchdatabase.js
             scripts.js
             simconfig_ui.css
             sim_script.js
@@ -41,3 +44,5 @@
             index.html
             simconfig_ui.html
             upload.html
+    tests/
+        detectorcalltest.py

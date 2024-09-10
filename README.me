@@ -1,6 +1,6 @@
-# SignalAssist 1.1
+# SignalAssist 1.5
 
-This tool does two things as of today
+This tool does three things as of today
 
 * Convert raw highresolution data into readable format
     + All files converted can be exported into csv or excel which includes description of events
@@ -12,6 +12,10 @@ This tool does two things as of today
 * Simulate detector inputs based on the specified volume and occupancy requirements
     + Eventhough UI says 'Detectors', we simulate Input points from inputppoint table 1
     + We can simulate different detectors from different devices with varying frequencies, volume and occupancy at the same time
+
+* Fetch Active Database From controller
+    + It copies the current active database, name it as current timestamp and set it as active
+    + 
 
 
 How to create a docker image, make a docker tar ball and load a docker tar ball
