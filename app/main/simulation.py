@@ -1,11 +1,15 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify, Flask
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify, Flask, jsonify, send_file, render_template
 import logging
 import os
 import json
 import asyncio
 from app.services.det_simulator import run_simulation, stop_event
 from app.services.simulation_state import set_simulation_status, get_simulation_status
+import requests
+import time
+from config import Config
 
+logging.basicConfig(level=logging.INFO)
 # Create a blueprint for simulation-related routes
 simulation = Blueprint('simulation', __name__)
 
@@ -175,3 +179,44 @@ def simulation_status_endpoint():
     else:
         success_percent = 0  # or you could use None, or some other appropriate value
     return jsonify({'status': status, 'Total_Requests': total, 'Successful_Requests': succesful, 'Failed_Requests': failed, 'success_percent': success_percent})
+
+
+@simulation.route('/fetch-database', methods=['POST'])
+def fetch_database():
+    data = request.json
+    hostname = data.get('hostname')
+    if not hostname:
+        return jsonify({'error': 'Hostname is required'}), 400
+
+    try:
+        # Generate a timestamp
+        current_timestamp = str(int(time.time()))
+
+        # First API request
+        first_request_body = f'<mibobjects><mibscalar name="SavUsrDB"><data index="1" value="{current_timestamp}" counter="0"/></mibscalar></mibobjects>'
+        first_response = requests.post(f'http://{hostname}/v1/mib/objs?type=xml', data=first_request_body, timeout=10)
+        logging.info(f"First API request sent to {hostname} at {current_timestamp}")
+
+        # Wait for 2 seconds
+        time.sleep(2)
+
+        # Second API request
+        second_request_body = {"type": "user", "name": current_timestamp}
+        second_response = requests.post(f'http://{hostname}/maxtime/api/db/download', json=second_request_body, timeout=10)
+        logging.info(f"Second API request sent to {hostname} for database download")
+
+        # Save the response as a .bin file
+        os.makedirs(Config.TEMPORARY_FILES_DIR, exist_ok=True)
+        binfilename = f"{current_timestamp}.bin"
+        tempfilepath = os.path.join(Config.TEMPORARY_FILES_DIR, 'binfilefromcontroller')
+        # file_path = os.path.join("/path/to/save", binfilename)  # Update with correct path
+        with open(tempfilepath, 'wb') as file:
+            file.write(second_response.content)
+
+        logging.info(f"Database saved as {binfilename}")
+
+        return send_file(tempfilepath, as_attachment=True, download_name=binfilename)
+
+    except requests.RequestException as e:
+        logging.error(f"Error during API request: {e}")
+        return jsonify({'error': 'Failed to fetch database from controller.'}), 500

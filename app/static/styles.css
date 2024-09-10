@@ -44,39 +44,70 @@ nav {
     background-color: white;
 }
 
-main {
+/* Main content layout */
+.main-content {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 2rem;
+    width: 100%;
 }
 
-.section {
+/* Left section */
+.left-section {
+    flex: 1;
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 2rem;
-    width: 45%;
-    margin: 0 auto;  /* Center the section block horizontally */
-    text-align: center;
-    
-    /* Flexbox properties for centering */
+    margin-right: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;  /* Vertical center */
-    align-items: center;  /* Horizontal center */
-    height: 700px; /* Set a specific height for the section block */
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+    max-width: 44%; /* Ensures the left section does not exceed 48% of the main content width */
 }
 
-.section h2 {
+/* Right section divided into two parts */
+.right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 700px;
+    max-width: 52%; /* Ensures the right section does not exceed 48% of the main content width */
+}
+
+/* Each half section within the right section */
+.half-section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.half-section:last-child {
+    margin-bottom: 0;
+}
+
+.section h2, .half-section h2 {
     color: #d6984f;
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    text-align: center; /* Center-align the header text */
 }
 
-.section p {
+.section p, .half-section p {
     font-size: 1rem;
     margin-bottom: 2rem;
+    text-align: center; /* Center-align the paragraph text */
 }
 
 .section-button {
@@ -96,6 +127,32 @@ main {
     background-color: #bf7e33;
 }
 
+.note-item {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 0.9rem !important;
+    color: #555 !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    white-space: nowrap !important; /* Prevents unnecessary wrapping */
+}
+
+/* Additional reset to ensure no extra spacing */
+.note-item em {
+    font-style: italic !important;
+    display: block !important; /* Force the notes to behave like block elements */
+    margin: 0 !important; /* Remove any extra margins */
+    padding: 0 !important; /* Remove any extra padding */
+    line-height: 0.5 !important; /* Consistent line height */
+}
+
+.note-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
@@ -110,7 +167,7 @@ form {
 
 label {
     margin: 15px 0;
-    margin-top: 20 px;
+    margin-top: 20px;
 }
 
 select, input[type="text"], button {
@@ -207,7 +264,7 @@ button:hover {
 }
 
 input[type="text"], input[type="password"] {
-    width: 25%;
+    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -342,3 +399,4 @@ input[type="radio"]:checked + span::before {
 input[type="radio"] {
     display: none;
 }
+

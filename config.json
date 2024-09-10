@@ -1,76 +1,16 @@
 {
     "devices": [
         {
-            "hostname": "kinetic-release-testing.q-free-asa.net/maxtime-13",
+            "hostname": "kinetic-release-testing.q-free-asa.net/maxtime-14",
             "detectors": [
                 {
-                    "detnumber": 1,
+                    "detnumber": 7,
                     "sequences": [
                         {
                             "volume": 30,
                             "occupancy": 50,
                             "frequency": 60,
-                            "cycles": 3
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "hostname": "kinetic-release-testing.q-free-asa.net/maxtime-14",
-            "detectors": [
-                {
-                    "detnumber": 1,
-                    "sequences": [
-                        {
-                            "volume": 10,
-                            "occupancy": 70,
-                            "frequency": 60,
-                            "cycles": 5
-                        },
-                        {
-                            "volume": 5,
-                            "occupancy": 50,
-                            "frequency": 60,
-                            "cycles": 5
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "hostname": "kinetic-release-testing.q-free-asa.net/maxtime-12",
-            "detectors": [
-                {
-                    "detnumber": 1,
-                    "sequences": [
-                        {
-                            "volume": 20,
-                            "occupancy": 60,
-                            "frequency": 60,
-                            "cycles": 3
-                        }
-                    ]
-                },
-                {
-                    "detnumber": 2,
-                    "sequences": [
-                        {
-                            "volume": 40,
-                            "occupancy": 50,
-                            "frequency": 60,
-                            "cycles": 5
-                        }
-                    ]
-                },
-                {
-                    "detnumber": 3,
-                    "sequences": [
-                        {
-                            "volume": 60,
-                            "occupancy": 30,
-                            "frequency": 60,
-                            "cycles": 5
+                            "cycles": 1
                         }
                     ]
                 }

@@ -97,7 +97,8 @@ async def run_detector(session, hostname, detector):
                 # Turn the detector on
                 await update_bit_group_state(hostname, bit_group, detnumber, True)
                 pattern_on = generate_masked_pattern(hostname, bit_group)
-                post_on = {'data': [{'name': f'inputPointGroupControl-1', 'data': pattern_on}], 'noChangeLog': True, 'username': 'Admin'}
+                print(pattern_on)
+                post_on = {'data': [{'name': f'vehicleDetectorControlGroupActuation', 'data': pattern_on}], 'noChangeLog': True, 'username': 'Admin'}
                 await post_data(session, uri, post_on)
 
                 await asyncio.sleep(percall_on_time)
@@ -105,7 +106,7 @@ async def run_detector(session, hostname, detector):
                 # Turn the detector off
                 await update_bit_group_state(hostname, bit_group, detnumber, False)
                 pattern_off = generate_masked_pattern(hostname, bit_group)
-                post_off = {'data': [{'name': f'inputPointGroupControl-1', 'data': pattern_off}], 'noChangeLog': True, 'username': 'Admin'}
+                post_off = {'data': [{'name': f'vehicleDetectorControlGroupActuation', 'data': pattern_off}], 'noChangeLog': True, 'username': 'Admin'}
                 await post_data(session, uri, post_off)
 
                 await asyncio.sleep(percall_off_time)

@@ -152,14 +152,46 @@ document.addEventListener('DOMContentLoaded', function () {
     checkSimulationStatus();
 
 
-    document.getElementById('start-simulation-btn').addEventListener('click', function() {
+    // document.getElementById('start-simulation-btn').addEventListener('click', function() {
+    //     inTransition = false;
+    //     fetch('/simulation/start-simulation', { method: 'POST' })
+    //         .then(() => {
+    //             checkSimulationStatus(); // Check status immediately after starting
+    //         });
+    // });
+
+    const startSimulationBtn = document.getElementById('start-simulation-btn');
+    const countdownContainer = document.getElementById('countdown-container'); // Use the existing countdown container
+
+    startSimulationBtn.addEventListener('click', function() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const delay = (58 - seconds) > 0 ? (58 - seconds) : (118 - seconds); // Time in seconds to wait until 00:55
+        let countdown = delay;
+
+        // Show the countdown timer
+        const countdownInterval = setInterval(() => {
+            countdownContainer.textContent = `Trying to start the simulation until it's about to be the next Minute. So waiting for another ${countdown} seconds...`;
+            countdown--;
+
+            if (countdown < 0) {
+                clearInterval(countdownInterval);
+                countdownContainer.textContent = ''; // Clear the countdown timer text
+                startSimulation();
+            }
+        }, 1000); // Update every second
+    });
+
+    function startSimulation() {
         inTransition = false;
         fetch('/simulation/start-simulation', { method: 'POST' })
             .then(() => {
                 checkSimulationStatus(); // Check status immediately after starting
+            })
+            .catch(error => {
+                console.error('Error starting simulation:', error);
             });
-    });
-
+    }
     document.getElementById('stop-simulation-btn').addEventListener('click', function() {
         inTransition = true; // Set the transition flag when stopping
         const greenIndicator = document.getElementById('green-indicator');
